@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Plutos Manager</title>
+        <link rel="stylesheet" type="text/css" href="../style/main.css">
+        <link rel="stylesheet" type="text/css" href="../style/responsive.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
+    </head>
+    <body>
+        <header>
+            <img src="../img/Logo-header.png" alt="Logo Plutos Manager">
+            <p>Olá, {nome do usuário}</p>
+            <nav class="menu-standard">
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="#" class="sistema">O sistema</a></li>
+                <li><a href="#" class="sistema border-right">Reservas</a></li>
+                <li><button class="exit"><a href="index.html">Sair <i class="fas fa-sign-out-alt"></i></a></button></li>
+            </ul>
+            </nav>
+            <button class="hamburger-menu" aria-label="Abrir menu"><span class="icon-menu"></span></button>
+        </header>
+        <main>
+            <div class="menu">
+                <ul>
+                    <li><a href="#">Home</a></li>
+                    <li><a href="#" class="sistema">O sistema</a></li>
+                    <li><a href="#" class="sistema">Reservas</a></li>
+                    <li><button class="exit"><a href="index.html">Sair <i class="fas fa-sign-out-alt"></i></a></button></li>
+                </ul>
+            </div>
+            <section class="register-Category">
+                <h4>Cadastro de Categoria</h4>
+                <form action="#">
+                    <label for="nome">Nome*</label>
+                    <input type="nome" id="name" name="nome" placeholder="Digite o nome">
+                    <label for="valor_hora">Valor por hora*</label>
+                    <input type="text" id="valor_hora" name="valor_hora" placeholder="R$0,00">
+                    <label for="valor_hora">Logotipo*</label>
+                    <button class="search-file"><i class="fas fa-search"></i>Escolher arquivo</button>
+                </form>
+                <section class="Buttons">
+                    <button type="submit">CADASTRAR</button>
+                    <button type="submit">LISTAR CATEGORIAS</button>
+                </section>
+            </section>
+        </main>
+        <footer>
+            <div class="icon-footer">
+                <img src="../img/Logo-header.png" alt="Icone do rodapé">
+            </div>
+            <div class="menu-footer">
+                <ul>
+                    <li><a href="#">Home</a></li>
+                    <li><a href="#">O sistema</a></li>
+                    <li><a href="#">Acessar</a></li>
+                </ul>      
+            </div>
+            <div class="contact">
+                <h3>Contatos</h3>
+                <h5>(17)996318375</h4>
+                <h5>(17)996318375</h4>
+                <h5>estacionafacil@gmail.com</h4>
+            </div>
+        </footer>
+        <script src="../script/script.js"></script>
+    </body>
+</html>

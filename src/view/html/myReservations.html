@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Plutos Manager</title>
+        <link rel="stylesheet" type="text/css" href="../style/main.css">
+        <link rel="stylesheet" type="text/css" href="../style/responsive.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
+    </head>
+    <body>
+        <header>
+            <img src="../img/Logo-header.png" alt="Logo Plutos Manager">
+            <p>Olá, {nome do usuário}</p>
+            <nav class="menu-standard">
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="#" class="sistema">O sistema</a></li>
+                <li><a href="#" class="sistema border-right">Reservas</a></li>
+                <li><button class="exit"><a href="index.html">Sair <i class="fas fa-sign-out-alt"></i></a></button></li>
+            </ul>
+            </nav>
+            <button class="hamburger-menu" aria-label="Abrir menu"><span class="icon-menu"></span></button>
+        </header>
+        <main>
+            <div class="menu">
+                <ul>
+                    <li><a href="#">Home</a></li>
+                    <li><a href="#" class="sistema">O sistema</a></li>
+                    <li><a href="#" class="sistema">Reservas</a></li>
+                    <li><button class="exit"><a href="index.html">Sair <i class="fas fa-sign-out-alt"></i></a></button></li>
+                </ul>
+            </div>
+            <section class="filter">
+                <div class="title-Resevations">
+                    <h2>Minhas Reservas</h2>
+                </div>
+                <div class="filter-date">
+                <h4>Selecione uma data:</h4>
+                <input type="date" id="data">
+                </div>
+            </section>
+            <section class="Reservations">
+                <table id="reservationsTable">
+                    <thead>
+                        <tr>
+                            <th class="tittleReservationCheckbox"></th> 
+                            <th>Cliente</th>
+                            <th>Estacionamento</th>
+                            <th>Data</th>
+                            <th>Veículo</th>
+                            <th class="tittleEditButton"></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="reservationCheckbox"><input type="checkbox" class="checkbox" class="checkbox"></td> 
+                            <td>Ariane Rodrigues</td>
+                            <td>Bom Preço</td>
+                            <td>13/02/2024, 12:30 - 14/02/2024, 11:30</td>
+                            <td>ABC1B34 - HONDA BIZ</td>
+                            <td class="editButton"><button class="editButton"><i class="fa-solid fa-pencil"></i></button></td>
+                        </tr>
+                        <tr>
+                            <td class="reservationCheckbox"><input type="checkbox" class="checkbox"></td> 
+                            <td>Henri Moraes</td>
+                            <td>Boa Viagem</td>
+                            <td>13/02/2024, 12:30 - 14/02/2024, 11:30</td>
+                            <td>EKS1F54-HONDA CIVIC</td>
+                            <td class="editButton"><button class="editButton"><i class="fa-solid fa-pencil"></i></button></td>
+                        </tr>
+                        <tr>
+                            <td class="reservationCheckbox"><input type="checkbox" class="checkbox"></td> 
+                            <td>João Eduardo</td>
+                            <td>Plutos Manager</td>
+                            <td>13/02/2024, 12:30 - 14/02/2024, 11:30</td>
+                            <td>WEO1J56-TOYOTA COROLLA</td>
+                            <td class="editButton"><button class="editButton"><i class="fa-solid fa-pencil"></i></button></td>
+                        </tr>
+                        <tr>
+                            <td class="reservationCheckbox"><input type="checkbox" class="checkbox"></td> 
+                            <td>Maria Fernanda</td>
+                            <td>Economico Estacionamento</td>
+                            <td>13/02/2024, 12:30 - 14/02/2024, 11:30</td>
+                            <td>WJD6R78-TOYOTA ETIOS</td>
+                            <td class="editButton"><button class="editButton"><i class="fa-solid fa-pencil"></i></button></td>
+                        </tr>
+                        <tr>
+                            <td class="reservationCheckbox"><input type="checkbox" class="checkbox"></td> 
+                            <td>Robson Isaac</td>
+                            <td>Med Park</td>
+                            <td>13/02/2024, 12:30 - 14/02/2024, 11:30</td>
+                            <td>WJD6R78-VOLKSWAGEN GOL</td>
+                            <td class="editButton"><button class="editButton"><i class="fa-solid fa-pencil"></i></button></td>
+                        </tr>
+                        <tr>
+                            <td class="reservationCheckbox"><input type="checkbox" class="checkbox"></td> 
+                            <td>Maria Vitória</td>
+                            <td>Estacionamento Catedral</td>
+                            <td>13/02/2024, 12:30 - 14/02/2024, 11:30</td>
+                            <td>WJD6R78 - HONDA CG TITAN</td>
+                            <td class="editButton"><button class="editButton"><i class="fa-solid fa-pencil"></i></button></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </section>
+            <section class = "btnDelete">
+                <button id="btnDelete">
+                    <i class="fas fa-trash-alt"></i> Excluir selecionados</button>
+            </section>
+        </main>
+        <footer>
+            <div class="icon-footer">
+                <img src="../img/Logo-header.png" alt="Icone do rodapé">
+            </div>
+            <div class="menu-footer">
+                <ul>
+                    <li><a href="#">Home</a></li>
+                    <li><a href="#">O sistema</a></li>
+                    <li><a href="#">Acessar</a></li>
+                </ul>      
+            </div>
+            <div class="contact">
+                <h3>Contatos</h3>
+                <h5>(17)996318375</h4>
+                <h5>(17)996318375</h4>
+                <h5>estacionafacil@gmail.com</h4>
+            </div>
+        </footer>
+        <script src="../script/script.js"></script>
+    </body>
+</html>

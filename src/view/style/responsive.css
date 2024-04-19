@@ -1,0 +1,135 @@
+@media only screen and (max-width: 900px) {
+    main {
+      margin-bottom: 120px;
+    }
+    header nav.menu-standard {
+      display: none; 
+    }
+  
+    .hamburger-menu {
+      display: block; 
+    }
+
+    section.home {
+      flex-direction: column;
+      align-items: center;
+    }
+
+    div.title {
+      max-width: 90%;
+    }
+    
+    div.title h1 {
+      padding: 20px 0;
+      font-size: 1.5em;
+    }
+    
+    section.system-instruction {
+      flex-direction: column;
+      align-items: center;
+    }
+    
+    section div.instruction {
+      height: auto;
+      padding: 0 20px;
+      width: auto;
+      max-width: 80%; 
+      text-align: center;
+    }
+    
+    section div.instruction img {
+      height: auto;
+      max-width: 80%;
+    }
+
+    section div.instruction h4 {
+      font-size: 1.2em;
+    }
+    
+    section div.instruction p {
+      font-size: 1.2em;
+      padding-bottom: 5px;
+      max-width: 80%; 
+    }
+
+    .create-account,
+    section.general-create-account,
+    .container {
+      width: 100%;
+      align-items: center;
+    }
+    section.inputs{
+      flex-direction: column;
+      width: 100%;
+      align-items: center;
+    }
+    .Reservations table {
+      width: 50%;
+      border-collapse: collapse;
+    }
+    .Reservations table tbody tr td.editButton {
+      margin-top: 20px;
+    }
+    section.finalize-reservation{
+      display: flex;
+      flex-direction: column-reverse;
+    }
+    .finalize-reservation > div.form-group {
+    justify-content: start;
+    align-items: center;
+    width: 100%;
+  
+    } 
+    .editButton > button{
+      border: none;
+    }
+    button.finalize {
+    width: 95%;
+    margin-left: 0px;
+    }
+
+    .finalize-reservation > div > p {
+    width: 100%;
+    text-align: center;
+    }
+
+    section.register-Category {
+      width: 43%;
+    }
+}
+
+@media only screen and (max-width: 980px) {
+  .Reservations table tbody tr td.editButton {
+    margin-top: 20px;
+  }
+
+}
+
+@media only screen and (max-width: 580px) {
+  .Reservations table {
+    width: 50%;
+    border-collapse: collapse;
+  }
+  .Reservations table td {
+    max-width: 50%; 
+    overflow: hidden; 
+    font-size: 0.7em;
+  }
+  .Reservations table tbody tr td.editButton {
+    margin-top: 15px;
+  }
+  .btnDelete > button {
+    margin-right: 1%;
+  }
+  section.Buttons {
+    display: flex;
+    flex-direction: column; 
+    justify-content: center;
+    width: 100%; 
+  }
+  section.Buttons > button {
+    margin: auto;
+    margin-top: 15px;
+    width: 75%;
+  }
+}
