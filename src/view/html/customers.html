@@ -14,7 +14,8 @@
             <ul>
                 <li><a href="index.html">Home</a></li>
                 <li><a href="#" class="sistema">O sistema</a></li>
-                <li><a href="#" class="sistema border-right">Reservas</a></li>
+                <li><a href="#" class="sistema border-right">Clientes</a></li>
+                <li><a href="category.html" class="sistema border-right">Categorias</a></li>
                 <li><button class="exit"><a href="index.html">Sair <i class="fas fa-sign-out-alt"></i></a></button></li>
             </ul>
             </nav>
@@ -25,17 +26,17 @@
                 <ul>
                     <li><a href="#">Home</a></li>
                     <li><a href="#" class="sistema">O sistema</a></li>
-                    <li><a href="#" class="sistema">Reservas</a></li>
+                    <li><a href="" class="sistema">Categorias</a></li>
                     <li><button class="exit"><a href="index.html">Sair <i class="fas fa-sign-out-alt"></i></a></button></li>
                 </ul>
             </div>
             <section class="filter">
-                <div class="title-Resevations">
-                    <h2>Minhas Reservas</h2>
-                </div>
-                <div class="filter-date">
-                <h4>Selecione uma data:</h4>
-                <input type="date" id="data">
+                <!-- <div class="title-Customers">
+                    <h2>Clientes cadastrados</h2>
+                </div> -->
+                <div class="filter-edt">
+                    <h4>Pesquise por Nome:</h4>
+                    <input type="text" id="name">
                 </div>
             </section>
             <section class="Reservations">
@@ -43,60 +44,60 @@
                     <thead>
                         <tr>
                             <th class="tittleReservationCheckbox"></th> 
-                            <th>Cliente</th>
-                            <th>Estacionamento</th>
-                            <th>Data</th>
-                            <th>Veículo</th>
+                            <th>Nome</th>
+                            <th>Telefone</th>
+                            <th>email</th>
+                            <th>Saldo Devedor</th>
                             <th class="tittleEditButton"></th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr>
                             <td class="reservationCheckbox"><input type="checkbox" class="checkbox" class="checkbox"></td> 
-                            <td>Ariane Rodrigues</td>
-                            <td>Bom Preço</td>
-                            <td>13/02/2024, 12:30 - 14/02/2024, 11:30</td>
-                            <td>ABC1B34 - HONDA BIZ</td>
+                            <td>Ariane Silva</td>
+                            <td>(17) 9999-9999</td>
+                            <td>mail@mail.com</td>
+                            <td>R$0,00</td>
                             <td class="editButton"><button class="editButton"><i class="fa-solid fa-pencil"></i></button></td>
                         </tr>
                         <tr>
                             <td class="reservationCheckbox"><input type="checkbox" class="checkbox"></td> 
-                            <td>Henri Moraes</td>
-                            <td>Boa Viagem</td>
-                            <td>13/02/2024, 12:30 - 14/02/2024, 11:30</td>
-                            <td>EKS1F54-HONDA CIVIC</td>
+                            <td>Henri Cristo</td>
+                            <td>(17) 9999-9999</td>
+                            <td>mail@mail.com</td>
+                            <td>R$0,00</td>
                             <td class="editButton"><button class="editButton"><i class="fa-solid fa-pencil"></i></button></td>
                         </tr>
                         <tr>
                             <td class="reservationCheckbox"><input type="checkbox" class="checkbox"></td> 
-                            <td>João Eduardo</td>
-                            <td>Plutos Manager</td>
-                            <td>13/02/2024, 12:30 - 14/02/2024, 11:30</td>
-                            <td>WEO1J56-TOYOTA COROLLA</td>
+                            <td>João Lucas</td>
+                            <td>(17) 9999-9999</td>
+                            <td>mail@mail.com</td>
+                            <td>R$0,00</td>
                             <td class="editButton"><button class="editButton"><i class="fa-solid fa-pencil"></i></button></td>
                         </tr>
                         <tr>
                             <td class="reservationCheckbox"><input type="checkbox" class="checkbox"></td> 
-                            <td>Maria Fernanda</td>
-                            <td>Economico Estacionamento</td>
-                            <td>13/02/2024, 12:30 - 14/02/2024, 11:30</td>
-                            <td>WJD6R78-TOYOTA ETIOS</td>
+                            <td>Maria Clara</td>
+                            <td>(17) 9999-9999</td>
+                            <td>mail@mail.com</td>
+                            <td>R$0,00</td>
                             <td class="editButton"><button class="editButton"><i class="fa-solid fa-pencil"></i></button></td>
                         </tr>
                         <tr>
                             <td class="reservationCheckbox"><input type="checkbox" class="checkbox"></td> 
-                            <td>Robson Isaac</td>
-                            <td>Med Park</td>
-                            <td>13/02/2024, 12:30 - 14/02/2024, 11:30</td>
-                            <td>WJD6R78-VOLKSWAGEN GOL</td>
+                            <td>Robson Garcia</td>
+                            <td>(17) 9999-9999</td>
+                            <td>mail@mail.com</td>
+                            <td>R$0,00</td>
                             <td class="editButton"><button class="editButton"><i class="fa-solid fa-pencil"></i></button></td>
                         </tr>
                         <tr>
                             <td class="reservationCheckbox"><input type="checkbox" class="checkbox"></td> 
-                            <td>Maria Vitória</td>
-                            <td>Estacionamento Catedral</td>
-                            <td>13/02/2024, 12:30 - 14/02/2024, 11:30</td>
-                            <td>WJD6R78 - HONDA CG TITAN</td>
+                            <td>Maria Eduarda</td>
+                            <td>(17) 9999-9999</td>
+                            <td>mail@mail.com</td>
+                            <td>R$0,00</td>
                             <td class="editButton"><button class="editButton"><i class="fa-solid fa-pencil"></i></button></td>
                         </tr>
                     </tbody>
