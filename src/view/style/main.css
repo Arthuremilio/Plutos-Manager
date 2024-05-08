@@ -209,6 +209,9 @@ div.contact h5 {
   padding-right: 5%;
   box-sizing: content-box;
 }
+a {
+  text-decoration: none;
+}
 
 /*Geral - Menu responsivo */
 
