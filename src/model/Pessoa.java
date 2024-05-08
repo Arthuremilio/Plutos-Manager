@@ -4,6 +4,7 @@ public class Pessoa {
     private String documento;
     private String telefone;
     private String email;
+    private String cep;
     private String logradouro;
     private String numero;
     private String cidade;
@@ -17,6 +18,7 @@ public class Pessoa {
         documento = new String();
         telefone = new String();
         email = new String();
+        cep = new String();
         logradouro =  new String();
         numero =  new String();
         cidade = new String();
@@ -25,12 +27,13 @@ public class Pessoa {
         usuario = 0;        
     }
  
-    public Pessoa(int id, String nome, String documento, String telefone, String email, String logradouro, String numero, String cidade, String estado, String pais, String senha, Date vencimento, int usuario) {
+    public Pessoa(int id, String nome, String documento, String telefone, String email, String cep, String logradouro, String numero, String cidade, String estado, String pais, String senha, Date vencimento, int usuario) {
         this.id = id;
         this.nome = nome;
         this.documento = documento;
         this.telefone = telefone;
         this.email = email;
+        this.cep = cep;
         this.logradouro = logradouro;
         this.numero = numero;
         this.cidade = cidade;
@@ -126,6 +129,16 @@ public class Pessoa {
     public void setUsuario(int usuario) {
         this.usuario = usuario;
     }
+
+    public String getCep() {
+        return cep;
+    }
+
+    public void setCep(String cep) {
+        this.cep = cep;
+    }
+
+    
 }
 
 
