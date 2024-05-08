@@ -203,6 +203,13 @@ div.contact h5 {
 
 }
 
+::placeholder {
+  color: var(--white);
+  text-align: right;
+  padding-right: 5%;
+  box-sizing: content-box;
+}
+
 /*Geral - Menu responsivo */
 
 .menu {
@@ -1035,7 +1042,7 @@ section.register-Category form  > input {
 }
 
 section.register-Category form  > input::placeholder {
-  color: #ddd;
+  color: var();
 }
 /* .search-file {
   width: 70%;
@@ -1122,7 +1129,7 @@ section.register-Customer form  > input {
 }
 
 section.register-Customer form  > input::placeholder {
-  color: #ddd;
+  color: #fff;
 }
 .container {
   width: 400px;
@@ -1133,7 +1140,8 @@ section.register-Customer form  > input::placeholder {
 div.container > form > div.input-group-customer {
   display: flex;
   flex-direction: column;
-  align-items: flex-start; 
+  align-items: flex-start;
+  color: var(--white); 
 }
 
 div.input-group-customer input {
@@ -1144,6 +1152,19 @@ div.input-group-customer input {
   border: none;
   color: var(--white);
   padding: 3px;
+}
+#preco, #custo {
+  text-align: center;
+}
+
+div.input-group-customer select {
+  width: 103%;
+  border-radius: 15px;
+  height: 25px;
+  background-color: var(--input-color);
+  border: none;
+  color: var(--white);
+  padding: 3px;  
 }
 
 
