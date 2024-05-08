@@ -14,7 +14,7 @@
             <ul>
                 <li><a href="#">Clientes</a></li>
                 <li><a href="#">Produtos</a></li>
-                <li><a href="#">Formas de pagamento</a></li>
+                <li><a href="payment-index.html">Formas de pagamento</a></li>
                 <li><a href="category-index.html">Categorias</a></li>
                 <li><a href="#" class="border-right" >Vendas</a></li>
                 <li><button class="exit"><a href="index.html">Sair <i class="fas fa-sign-out-alt"></i></a></button></li>
@@ -28,23 +28,52 @@
                     <li><a href="#">Clientes</a></li>
                     <li><a href="#">Produtos</a></li>
                     <li><a href="payment-index.html">Formas de pagamento</a></li>
-                    <li><a href="#">Categorias</a></li>
+                    <li><a href="category-index.html">Categorias</a></li>
                     <li><a href="#">Vendas</a></li>
                     <li><button class="exit"><a href="index.html">Sair <i class="fas fa-sign-out-alt"></i></a></button></li>
                 </ul>
             </div>
-            <section class="general">
-                <section class="system-instruction">
-                    <div class="instruction">
-                        <img src="../img/index - 1.png" alt="Plano mensal">
-                        <button type="submit" class="continue-for-payment"><a href="registerCategory.html">Adicionar</a></button>
-                    </div>
-                    <div class="instruction">
-                        <img src="../img/index - 2.png" alt="Plano anual">
-
-                        <button type="submit" class="continue-for-payment"><a href="category.html">Visualizar</a></button>
-                    </div>
-                </section>
+            <section class="filter">
+                <div class="title-Customers">
+                    <h2>Categorias</h2>
+                </div>
+            </section>
+            <section class="Reservations">
+                <table id="reservationsTable">
+                    <thead>
+                        <tr>
+                            <th class="tittleReservationCheckbox"></th> 
+                            <th>Formas de pagamento</th>
+                            <th class="tittleEditButton"></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="reservationCheckbox"><input type="checkbox" class="checkbox" class="checkbox"></td> 
+                            <td>Pix</td>
+                            <td class="editButton"><button class="editButton"><i class="fa-solid fa-pencil"></i></button></td>
+                        </tr>
+                        <tr>
+                            <td class="reservationCheckbox"><input type="checkbox" class="checkbox"></td> 
+                            <td>Debito</td>
+                            <td class="editButton"><button class="editButton"><i class="fa-solid fa-pencil"></i></button></td>
+                        </tr>
+                        <tr>
+                            <td class="reservationCheckbox"><input type="checkbox" class="checkbox"></td> 
+                            <td>Crédito</td>
+                            <td class="editButton"><button class="editButton"><i class="fa-solid fa-pencil"></i></button></td>
+                        </tr>
+                        <tr>
+                            <td class="reservationCheckbox"><input type="checkbox" class="checkbox"></td> 
+                            <td>A prazo</td>
+                            <td class="editButton"><button class="editButton"><i class="fa-solid fa-pencil"></i></button></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </section>
+            <section class = "btnDelete">
+                <button id="btnDelete">
+                    <i class="fas fa-trash-alt"></i> Excluir selecionados</button>
             </section>
         </main>
         <footer>
@@ -59,7 +88,7 @@
                     <li><a href="category-index.html">Categorias</a></li>
                     <li><a href="#">Vendas</a></li>
                     <li><button class="exit"><a href="index.html">Sair <i class="fas fa-sign-out-alt"></i></a></button></li>
-                </ul>    
+                </ul>   
             </div>
             <div class="contact">
                 <h3>Contatos</h3>
