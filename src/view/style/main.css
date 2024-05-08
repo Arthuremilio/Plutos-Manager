@@ -379,7 +379,7 @@ section.container-acess {
 }
 
 section.container-acess h1, label, a {
-  color: var(--bg-header);
+  color: var(--white);
   text-align: center;
   padding: 5px 0;
 }
@@ -1018,7 +1018,7 @@ section.register-Category form > label {
   display: flex;
   flex-direction: row;
   align-items: start;
-  color: var(--white)
+  color: var(--white);
   justify-content: flex-start;
   margin-top: 10px;
   margin-bottom: 5px;
