@@ -604,7 +604,6 @@ div.input-group input {
 }
 
 div.cep-number {
-  margin-top: 10px;
   display: flex;
   flex-direction: row;
 }

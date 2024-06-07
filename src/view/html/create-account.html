@@ -32,26 +32,30 @@
                 <section class="general-create-account">
                         <section class="inputs">
                             <div class="container">
-                                <form action="#">
+                                <form action="#" class="create-account-form">
                                     <div class="input-group">
-                                        <label for="email">Email*</label>
-                                        <input type="email" id="email" name="email" required>
+                                        <label for="email">Email</label>
+                                        <input type="text" id="email" name="email" required>
                                     </div>
                                     <div class="input-group">
-                                        <label for="nome">Nome*</label>
+                                        <label for="nome">Nome</label>
                                         <input type="text" id="nome" name="nome" required>
                                     </div>
                                     <div class="input-group">
-                                        <label for="telefone">Telefone*</label>
+                                        <label for="telefone">Telefone</label>
                                         <input type="text" id="telefone" name="telefone" required>
                                     </div>
                                     <div class="input-group">
-                                        <label for="documento">Documento*</label>
+                                        <label for="documento">Documento</label>
                                         <input type="text" id="documento" name="documento" required>
+                                    </div>
+                                    <div class="input-group">
+                                        <label for="dataNascimento">Data de Nascimento*</label>
+                                        <input type="date" id="dataNascimento" name="dataNascimento" required>
                                     </div>
                                     <div class="cep-number">
                                         <div class="input-cep">
-                                            <label for="cep">CEP*</label>
+                                            <label for="cep">CEP</label>
                                             <input type="text" id="cep" name="cep" required>
                                         </div>
                                         <div class="input-number">
@@ -59,13 +63,17 @@
                                             <input type="text" id="numero" name="numero" required>
                                         </div>
                                     </div>
-                                </form>
-                            </div>
-                            <div class="container">
-                                <form action="#">
                                     <div class="input-group">
                                         <label for="cidade">Cidade</label>
                                         <input type="text" id="cidade" name="cidade" required>
+                                    </div>
+                                </form>
+                            </div>
+                            <div class="container">
+                                <form action="#" class="create-account-form">
+                                    <div class="input-group">
+                                        <label for="pais">Pais</label>
+                                        <input type="text" id="pais" name="pais" required>
                                     </div>
                                     <div class="input-group">
                                         <label for="estado">Estado</label>
@@ -79,7 +87,19 @@
                                         <label for="bairro">Bairro</label>
                                         <input type="text" id="bairro" name="bairro" required>
                                     </div>
-                                    <button type="submit" class="continue"><a href="create-user.html">PROSSEGUIR</a></button>
+                                    <div class="input-group">
+                                        <label for="usuario">Nome de Usuario*</label>
+                                        <input type="text" id="usuario" name="usuario" required>
+                                    </div>
+                                    <div class="input-group">
+                                        <label for="senha">Senha*</label>
+                                        <input type="text" id="senha" name="senha" required>
+                                    </div>
+                                    <div class="input-group">
+                                        <label for="repetirSenha">Repetir senha*</label>
+                                        <input type="text" id="repetirSenha" name="repetirSenha" required>
+                                    </div>
+                                    <button type="submit" class="continue"><a href="#">PROSSEGUIR</a></button>
                                 </form>
                             </div>
                         </section>
