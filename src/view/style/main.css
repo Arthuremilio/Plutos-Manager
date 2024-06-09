@@ -212,6 +212,13 @@ div.contact h5 {
 a {
   text-decoration: none;
 }
+.hint {
+  font-size: 1em;
+  font-weight: bolder;
+  margin-top: 5px;
+  padding: 3px;
+  border-radius: 18px;
+}
 
 /*Geral - Menu responsivo */
 

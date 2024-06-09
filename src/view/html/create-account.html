@@ -4,6 +4,7 @@
         <title>Plutos Manager</title>
         <link rel="stylesheet" type="text/css" href="../style/main.css">
         <link rel="stylesheet" type="text/css" href="../style/responsive.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     </head>
     <body>
         <header>
@@ -46,7 +47,7 @@
                                         <input type="text" id="telefone" name="telefone" required>
                                     </div>
                                     <div class="input-group">
-                                        <label for="documento">Documento</label>
+                                        <label for="documento">Documento  <span id="cpf-hint" class="hint"></span></label>
                                         <input type="text" id="documento" name="documento" required>
                                     </div>
                                     <div class="input-group">
@@ -93,11 +94,11 @@
                                     </div>
                                     <div class="input-group">
                                         <label for="senha">Senha*</label>
-                                        <input type="text" id="senha" name="senha" required>
+                                        <input type="password" id="senha" name="senha" required>
                                     </div>
                                     <div class="input-group">
                                         <label for="repetirSenha">Repetir senha*</label>
-                                        <input type="text" id="repetirSenha" name="repetirSenha" required>
+                                        <input type="password" id="repetirSenha" name="repetirSenha" required>
                                     </div>
                                     <button type="submit" class="continue"><a href="#">PROSSEGUIR</a></button>
                                 </form>
