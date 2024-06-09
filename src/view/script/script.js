@@ -20,6 +20,10 @@ document.addEventListener('DOMContentLoaded', function() {
         }
       });
     })});
+    function formatarDataParaBR(data) {
+      const [ano, mes, dia] = data.split('-');
+      return `${dia}/${mes}/${ano}`;
+  }
   
     // hamburgerMenu.addEventListener('click', function() {
     //   menu.classList.toggle('open'); 
@@ -67,15 +71,15 @@ document.addEventListener('DOMContentLoaded', function() {
                 cep: document.getElementById('cep').value,
                 rua: document.getElementById('rua').value,
                 bairro: document.getElementById('bairro').value,
-                numeroresidencia: document.getElementById('numero').value,
+                numeroResidencia: document.getElementById('numero').value,
                 telefone: document.getElementById('telefone').value,                
                 cidade: document.getElementById('cidade').value,
                 pais: document.getElementById('pais').value,
                 estado: document.getElementById('estado').value,
-                dataNascimento: document.getElementById('dataNascimento').value,         
-                vencimento: vencimento                                                                 
+                dataNascimento: formatarDataParaBR(document.getElementById('dataNascimento').value),         
+                vencimento: formatarDataParaBR(vencimento)                                                                 
             };
-            console.log("data criado para o usuario:" + data.loginUsuario);
+            console.log(JSON.stringify(data));
             fetch('http://localhost:8080/api/usuarios', {
                 method: 'POST',
                 headers: {
@@ -95,5 +99,8 @@ document.addEventListener('DOMContentLoaded', function() {
             });
         });
     });
+  
+    //cadastrar pessoa
+    
 });
 
