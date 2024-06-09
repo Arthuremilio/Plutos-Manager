@@ -29,79 +29,81 @@ document.addEventListener('DOMContentLoaded', function() {
   
     // Validação de CPF  
     document.addEventListener('DOMContentLoaded', function() {
-      console.log("DOM totalmente carregado e analisado");
+        const pathname = window.location.pathname;
+        if (pathname.includes('create-account') || pathname.includes('registerCustomer')) {        
+            console.log("DOM totalmente carregado e analisado");
   
-      function validarCPF(cpf) {
-          cpf = cpf.replace(/[^\d]/g, '');
-          console.log("CPF formatado:", cpf);
-  
-          if (cpf.length !== 11 || /^(\d)\1+$/.test(cpf)) {
-              console.log("CPF inválido: tamanho errado ou sequência de dígitos repetidos");
-              return false;
-          }
-  
-          let soma = 0;
-          for (let i = 0; i < 9; i++) {
-              soma += parseInt(cpf.charAt(i)) * (10 - i);
-          }
-  
-          let resto = 11 - (soma % 11);
-          let digitoVerificador = resto === 10 || resto === 11 ? 0 : resto;
-  
-          if (digitoVerificador !== parseInt(cpf.charAt(9))) {
-              console.log("Primeiro dígito verificador inválido");
-              return false;
-          }
-  
-          soma = 0;
-          for (let i = 0; i < 10; i++) {
-              soma += parseInt(cpf.charAt(i)) * (11 - i);
-          }
-  
-          resto = 11 - (soma % 11);
-          digitoVerificador = resto === 10 || resto === 11 ? 0 : resto;
-  
-          if (digitoVerificador !== parseInt(cpf.charAt(10))) {
-              console.log("Segundo dígito verificador inválido");
-              return false;
-          }
-
-          return true;
-      }
-  
-      function validarCampoCPF() {
-          let campoCPF = document.getElementById('documento');
-          let hint = document.getElementById('cpf-hint');
-          if (!campoCPF) {
-              console.log("Elemento campoCPF não encontrado");
-              return;
-          }
-  
-          console.log("Elemento campoCPF encontrado:", campoCPF);
-  
-          campoCPF.addEventListener("change", function() {
-              let cpf = campoCPF.value;
-              console.log("Validando CPF:", cpf);
-  
-              if (validarCPF(cpf)) {
-                campoCPF.setCustomValidity('CPF válido');
-                campoCPF.style.borderColor = 'green';
-                campoCPF.style.backgroundColor = 'green';
-                hint.innerHTML  = 'CPF válido <i class="fas fa-check-circle fa-lg"></i>';
-                hint.style.color = 'green';
-            } else {
-                campoCPF.setCustomValidity('CPF inválido');
-                campoCPF.style.borderColor = 'red';
-                campoCPF.style.backgroundColor = 'red';
-                hint.innerHTML  = 'CPF inválido <i class="fas fa-times-circle fa-lg"></i>';
-                hint.style.color = 'red';
-            }
-          });
-      }
-  
-      validarCampoCPF();
+            function validarCPF(cpf) {
+                cpf = cpf.replace(/[^\d]/g, '');
+                console.log("CPF formatado:", cpf);
         
-  });
+                if (cpf.length !== 11 || /^(\d)\1+$/.test(cpf)) {
+                    console.log("CPF inválido: tamanho errado ou sequência de dígitos repetidos");
+                    return false;
+                }
+        
+                let soma = 0;
+                for (let i = 0; i < 9; i++) {
+                    soma += parseInt(cpf.charAt(i)) * (10 - i);
+                }
+        
+                let resto = 11 - (soma % 11);
+                let digitoVerificador = resto === 10 || resto === 11 ? 0 : resto;
+        
+                if (digitoVerificador !== parseInt(cpf.charAt(9))) {
+                    console.log("Primeiro dígito verificador inválido");
+                    return false;
+                }
+        
+                soma = 0;
+                for (let i = 0; i < 10; i++) {
+                    soma += parseInt(cpf.charAt(i)) * (11 - i);
+                }
+        
+                resto = 11 - (soma % 11);
+                digitoVerificador = resto === 10 || resto === 11 ? 0 : resto;
+        
+                if (digitoVerificador !== parseInt(cpf.charAt(10))) {
+                    console.log("Segundo dígito verificador inválido");
+                    return false;
+                }
+
+                return true;
+            }
+        
+            function validarCampoCPF() {
+                let campoCPF = document.getElementById('documento');
+                let hint = document.getElementById('cpf-hint');
+                if (!campoCPF) {
+                    console.log("Elemento campoCPF não encontrado");
+                    return;
+                }
+        
+                console.log("Elemento campoCPF encontrado:", campoCPF);
+        
+                campoCPF.addEventListener("change", function() {
+                    let cpf = campoCPF.value;
+                    console.log("Validando CPF:", cpf);
+        
+                    if (validarCPF(cpf)) {
+                        campoCPF.setCustomValidity('CPF válido');
+                        campoCPF.style.borderColor = 'green';
+                        campoCPF.style.backgroundColor = 'green';
+                        hint.innerHTML  = 'CPF válido <i class="fas fa-check-circle fa-lg"></i>';
+                        hint.style.color = 'green';
+                    } else {
+                        campoCPF.setCustomValidity('CPF inválido');
+                        campoCPF.style.borderColor = 'red';
+                        campoCPF.style.backgroundColor = 'red';
+                        hint.innerHTML  = 'CPF inválido <i class="fas fa-times-circle fa-lg"></i>';
+                        hint.style.color = 'red';
+                    }
+                });
+            }
+        
+            validarCampoCPF();
+        }       
+    });
   
 
   
@@ -122,16 +124,21 @@ document.addEventListener('DOMContentLoaded', function() {
   //   });
   // });
 
-  // CONSUMINDO AS APIS DO BACKEND
-
-  //cadastrar usuário 
+//Salvar usuário logado
+    function salvarUsuarioSenhaNoLocalStorage(usuario, senha) {
+        localStorage.setItem('usuario', usuario);
+        localStorage.setItem('senha', senha);
+        console.log("Usuário e senha armazenados em localStorage");
+    }
+// CONSUMINDO AS APIS DO BACKEND
+//cadastrar usuário 
   document.addEventListener('DOMContentLoaded', function () {
     const forms = document.querySelectorAll('.create-account-form');
 
     forms.forEach(function(form) {
         form.addEventListener('submit', function (event) {
             event.preventDefault();
-
+            const usuario = document.getElementById('usuario').value
             const senha = document.getElementById('senha').value;
             const repetirSenha = document.getElementById('repetirSenha').value;
             const dataAtual = new Date();
@@ -149,7 +156,7 @@ document.addEventListener('DOMContentLoaded', function() {
             }
 
             const data = {
-                loginUsuario: document.getElementById('usuario').value,
+                loginUsuario: usuario,
                 nomeUsuario: document.getElementById('nome').value,
                 senha: senha,
                 email: document.getElementById('email').value,
@@ -175,9 +182,12 @@ document.addEventListener('DOMContentLoaded', function() {
             })
             .then(response => response.json())
             .then(data => {
-                console.log('Success:', data.usuario);
+                console.log('Success:', data.loginUsuario);
                 alert('Usuário criado com sucesso!');
                 form.reset();
+
+                salvarUsuarioSenhaNoLocalStorage(usuario, senha);
+                window.location.href = 'home.html';
             })
             .catch((error) => {
                 console.error('Error:', error);
@@ -185,8 +195,29 @@ document.addEventListener('DOMContentLoaded', function() {
             });
         });
     });
-  
-    //cadastrar pessoa
-    
+
+    // Exibir o usuário na saudação da tela home
+    window.onload = function() {
+        const usuarioLogado = document.getElementById('usuarioLogado');
+        const pathname = window.location.pathname;
+        const usuario = localStorage.getItem('usuario');
+        if (pathname.includes('home')) {
+            const saudacao = document.getElementById('saudacao');
+            if (saudacao) {
+                if (usuario) {
+                    saudacao.innerHTML = 'Seja Bem-vindo ' + usuario + '!';
+                } else {
+                    console.log("Nenhum usuário encontrado no localStorage");
+                }
+            } 
+        } 
+        if (usuarioLogado) {
+            if (usuario) {
+                usuarioLogado.innerHTML = 'Olá, ' + usuario + '!';
+            } else {
+                console.log("Nenhum usuário encontrado no localStorage");
+            }
+        } 
+    }; 
 });
 
