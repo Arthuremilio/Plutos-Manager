@@ -1,26 +1,3 @@
-document.addEventListener('DOMContentLoaded', function() {
-    const hamburgerMenu = document.querySelector('.hamburger-menu');
-    const menu = document.querySelector('.menu');
-    const overlay = document.querySelector('.overlay');
-    const closeMenuButton = document.querySelector('.close-menu');
-    const checkboxes = document.querySelectorAll('.checkbox');
-
-    checkboxes.forEach(function(checkbox) {
-      checkbox.addEventListener('change', function() {
-        var row = this.closest('tr');
-        var button = row.querySelector('button.editButton')
-        if (this.checked) {
-          row.style.backgroundColor = 'darkred';
-          row.style.color = 'white';
-          button.style.backgroundColor = 'darkred'
-        } else {
-          row.style.backgroundColor = '';
-          row.style.color = '';
-          button.style.backgroundColor = '';
-        }
-      });
-    })});
-
     // Formatar a data para padrão BR
     function formatarDataParaBR(data) {
       const [ano, mes, dia] = data.split('-');
@@ -104,25 +81,6 @@ document.addEventListener('DOMContentLoaded', function() {
             validarCampoCPF();
         }       
     });
-  
-
-  
-  
-    // hamburgerMenu.addEventListener('click', function() {
-    //   menu.classList.toggle('open'); 
-    //   overlay.style.display = menu.classList.contains('open') ? 'block' : 'none'; 
-    // });
-  
-    // overlay.addEventListener('click', function() {
-    //   menu.classList.remove('open'); 
-    //   overlay.style.display = 'none';
-    // });
-  
-  //   closeMenuButton.addEventListener('click', function() {
-  //     menu.classList.remove('open'); 
-  //     overlay.style.display = 'none';
-  //   });
-  // });
 
 //Salvar usuário logado
     function salvarUsuarioSenhaNoLocalStorage(usuario, senha) {
@@ -130,73 +88,242 @@ document.addEventListener('DOMContentLoaded', function() {
         localStorage.setItem('senha', senha);
         console.log("Usuário e senha armazenados em localStorage");
     }
+
 // CONSUMINDO AS APIS DO BACKEND
 //cadastrar usuário 
-  document.addEventListener('DOMContentLoaded', function () {
-    const forms = document.querySelectorAll('.create-account-form');
+    document.addEventListener('DOMContentLoaded', function () {
+        const pathname = window.location.pathname;
+        if (pathname.includes('create-account')) {
+            const forms = document.querySelectorAll('.create-account-form');
 
-    forms.forEach(function(form) {
-        form.addEventListener('submit', function (event) {
-            event.preventDefault();
-            const usuario = document.getElementById('usuario').value
-            const senha = document.getElementById('senha').value;
-            const repetirSenha = document.getElementById('repetirSenha').value;
-            const dataAtual = new Date();
-            const vencimento = new Date(dataAtual.setMonth(dataAtual.getMonth() + 1)).toISOString().split('T')[0];
-            const hint = document.getElementById('cpf-hint');
+            forms.forEach(function(form) {
+                form.addEventListener('submit', function (event) {
+                    event.preventDefault();
+                    const usuario = document.getElementById('usuario').value
+                    const senha = document.getElementById('senha').value;
+                    const repetirSenha = document.getElementById('repetirSenha').value;
+                    const dataAtual = new Date();
+                    const vencimento = new Date(dataAtual.setMonth(dataAtual.getMonth() + 1)).toISOString().split('T')[0];
+                    const hint = document.getElementById('cpf-hint');
 
-            if (senha !== repetirSenha) {
-                alert('As senhas não coincidem!');
-                return;
-            }
+                    if (senha !== repetirSenha) {
+                        alert('As senhas não coincidem!');
+                        return;
+                    }
 
-            if (hint.style.color === 'red') {
-                alert('CPF informado é inválido!');
-                return;
-            }
+                    if (hint.style.color === 'red') {
+                        alert('CPF informado é inválido!');
+                        return;
+                    }
 
-            const data = {
-                loginUsuario: usuario,
-                nomeUsuario: document.getElementById('nome').value,
-                senha: senha,
-                email: document.getElementById('email').value,
-                cpf: document.getElementById('documento').value,
-                cep: document.getElementById('cep').value,
-                rua: document.getElementById('rua').value,
-                bairro: document.getElementById('bairro').value,
-                numeroResidencia: document.getElementById('numero').value,
-                telefone: document.getElementById('telefone').value,                
-                cidade: document.getElementById('cidade').value,
-                pais: document.getElementById('pais').value,
-                estado: document.getElementById('estado').value,
-                dataNascimento: formatarDataParaBR(document.getElementById('dataNascimento').value),         
-                vencimento: formatarDataParaBR(vencimento)                                                                 
-            };
-            console.log(JSON.stringify(data));
-            fetch('http://localhost:8080/api/usuarios', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify(data)
-            })
-            .then(response => response.json())
-            .then(data => {
-                console.log('Success:', data.loginUsuario);
-                alert('Usuário criado com sucesso!');
-                form.reset();
+                    const data = {
+                        loginUsuario: usuario,
+                        nomeUsuario: document.getElementById('nome').value,
+                        senha: senha,
+                        email: document.getElementById('email').value,
+                        cpf: document.getElementById('documento').value,
+                        cep: document.getElementById('cep').value,
+                        rua: document.getElementById('rua').value,
+                        bairro: document.getElementById('bairro').value,
+                        numeroResidencia: document.getElementById('numero').value,
+                        telefone: document.getElementById('telefone').value,                
+                        cidade: document.getElementById('cidade').value,
+                        pais: document.getElementById('pais').value,
+                        estado: document.getElementById('estado').value,
+                        dataNascimento: formatarDataParaBR(document.getElementById('dataNascimento').value),         
+                        vencimento: formatarDataParaBR(vencimento)                                                                 
+                    };
+                    console.log(JSON.stringify(data));
+                    fetch('http://localhost:8080/api/usuarios', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify(data)
+                    })
+                    .then(response => response.json())
+                    .then(data => {
+                        console.log('Success:', data.loginUsuario);
+                        alert('Usuário criado com sucesso!');
+                        form.reset();
 
-                salvarUsuarioSenhaNoLocalStorage(usuario, senha);
-                window.location.href = 'home.html';
-            })
-            .catch((error) => {
-                console.error('Error:', error);
-                alert('Erro ao criar usuário.');
+                        salvarUsuarioSenhaNoLocalStorage(usuario, senha);
+                        window.location.href = 'home.html';
+                    })
+                    .catch((error) => {
+                        console.error('Error:', error);
+                        alert('Erro ao criar usuário.');
+                    });
+                });
             });
-        });
+    }});
+
+    //cadastro de pessoas
+    document.addEventListener('DOMContentLoaded', function () {
+        const pathname = window.location.pathname;
+    
+        if (pathname.includes('registerCustomer')) {
+    
+            const forms = document.querySelectorAll('.register-customer-form');
+    
+            forms.forEach(function(form) {
+                form.addEventListener('submit', function (event) {
+                    event.preventDefault();
+    
+                    const data = {
+                        nome: document.getElementById('nome').value,
+                        cpf: document.getElementById('documento').value,
+                        email: document.getElementById('email').value,
+                        telefone: document.getElementById('telefone').value,
+                        saldoDisponivel: parseFloat(document.getElementById('saldo').value),
+                        cep: document.getElementById('cep').value,
+                        rua: document.getElementById('rua').value,
+                        bairro: document.getElementById('bairro').value,
+                        numeroResidencia: document.getElementById('numero').value,
+                        cidade: document.getElementById('cidade').value,
+                        estado: document.getElementById('estado').value,
+                        pais: document.getElementById('pais').value,
+                        usuario: {
+                            usuarioId: "915B6BE9-2B0E-400E-A1F6-5A912CFD26F7"
+                        }
+                    };
+    
+                    console.log(JSON.stringify(data));
+    
+                    fetch('http://localhost:8080/api/pessoas', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify(data)
+                    })
+                    .then(response => response.json())
+                    .then(data => {
+                        console.log('Success:', data);
+                        alert('Cliente cadastrado com sucesso!');
+                        forms.forEach(form => form.reset());
+    
+                        salvarUsuarioSenhaNoLocalStorage('usuario', 'senha');
+                        window.location.href = 'customers.html';
+                    })
+                    .catch((error) => {
+                        console.error('Error:', error);
+                        alert('Erro ao cadastrar cliente.');
+                    });
+                });
+            });
+        };
     });
 
-    // Exibir o usuário na saudação da tela home
+    // Cadastro de categoria
+    document.addEventListener('DOMContentLoaded', function () {
+        const pathname = window.location.pathname;
+        
+        if (pathname.includes('registerCategory')) {
+            console.log('Entrou no método');
+            const forms = document.querySelectorAll('.register-category-form');
+            console.log('Formulários encontrados:', forms.length);
+    
+            forms.forEach(function(form) {
+                form.addEventListener('submit', function (event) {
+                    event.preventDefault();
+    
+                    const data = {
+                        nome: "Nova categoria",
+                        descricao: document.getElementById('name').value,
+                        usuario: {
+                            usuarioId: "915B6BE9-2B0E-400E-A1F6-5A912CFD26F7"
+                        }
+                    };
+    
+                    console.log(JSON.stringify(data));
+    
+                    fetch('http://localhost:8080/api/categoria', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify(data)
+                    })
+                    .then(response => response.json())
+                    .then(data => {
+                        console.log('Success:', data);
+                        alert('Categoria cadastrada com sucesso!');
+                        forms.forEach(form => form.reset());
+                        window.location.href = 'category.html';
+                    })
+                    .catch((error) => {
+                        console.error('Error:', error);
+                        alert('Erro ao cadastrar categoria.');
+                    });
+                });
+            });
+        }
+    });
+
+    //Listar Clientes
+    document.addEventListener('DOMContentLoaded', function () {
+        const pathname = window.location.pathname;
+        
+        if (pathname.includes('customers.html')) {
+            console.log('Entrou no método de categorias');
+    
+            fetch('http://localhost:8080/api/pessoas')
+            .then(response => response.json())
+            .then(data => {
+                console.log('Clientes obtidos:', data);
+    
+                const tableBody = document.querySelector('#reservationsTable tbody');
+                tableBody.innerHTML = '';  // Limpa o conteúdo existente da tabela
+                data.forEach(function(pessoa) {
+                    const row = document.createElement('tr');
+                    row.innerHTML = `
+                        <td class="reservationCheckbox"><input type="checkbox" class="checkbox"></td>
+                        <td>${pessoa.pessoaId}</td>
+                        <td>${pessoa.nome}</td>
+                        <td>${pessoa.email}</td>
+                        <td>${pessoa.telefone}</td>
+                        <td>${pessoa.saldoDisponivel.toFixed(2)}</td>
+                        <td class="editButton"><button class="editButton"><i class="fa-solid fa-pencil"></i></button></td>
+                    `;
+                    tableBody.appendChild(row);
+                });
+            })
+            .catch(error => console.error('Erro ao obter clientes:', error));
+        }
+    });
+    
+
+    //Listar categorias
+    document.addEventListener('DOMContentLoaded', function () {
+        const pathname = window.location.pathname;
+        
+        if (pathname.includes('category.html')) {
+            console.log('Entrou no método de categorias');
+    
+            fetch('http://localhost:8080/api/categoria')
+            .then(response => response.json())
+            .then(data => {
+                console.log('Categorias obtidas:', data);
+    
+                const tableBody = document.querySelector('#reservationsTable tbody');
+                data.forEach(function(categoria) {
+                    const row = document.createElement('tr');
+                    row.innerHTML = `
+                        <td class="reservationCheckbox"><input type="checkbox" class="checkbox"></td>
+                        <td>${categoria.categoriaId}</td>
+                        <td>${categoria.descricao}</td>
+                        <td class="editButton"><button class="editButton"><i class="fa-solid fa-pencil"></i></button></td>
+                    `;
+                    tableBody.appendChild(row);
+                });
+            })
+            .catch(error => console.error('Erro ao obter categorias:', error));
+        }
+    });
+    
+    
+    // Exibir o usuário
     window.onload = function() {
         const usuarioLogado = document.getElementById('usuarioLogado');
         const pathname = window.location.pathname;
@@ -218,6 +345,47 @@ document.addEventListener('DOMContentLoaded', function() {
                 console.log("Nenhum usuário encontrado no localStorage");
             }
         } 
-    }; 
-});
-
+    };
+    // listar categorias no cadastro de produtos
+    document.addEventListener('DOMContentLoaded', function() {
+        const selectCategoria = document.getElementById('categoria');
+    
+        fetch('http://localhost:8080/api/categoria')
+        .then(response => response.json())
+        .then(data => {
+            data.forEach(function(categoria) {
+                const option = document.createElement('option');
+                option.value = categoria.categoriaId;
+                option.textContent = categoria.descricao;
+                selectCategoria.appendChild(option);
+            });
+        })
+        .catch(error => console.error('Erro ao obter categorias:', error));
+    });
+    
+    // mudar a cor na grid para linhas selecionadas 
+    document.addEventListener('DOMContentLoaded', function() {
+        const reservationsTable = document.getElementById('reservationsTable');
+        reservationsTable.addEventListener('change', function(event) {
+            if (event.target.matches('.checkbox')) {
+                var row = event.target.closest('tr');
+                if (row) {
+                    var button = row.querySelector('button.editButton')
+                    if (event.target.checked) {
+                        row.style.backgroundColor = 'darkred';
+                        row.style.color = 'white';
+                        if (button) {
+                            button.style.backgroundColor = 'darkred';
+                        }
+                    } else {
+                        row.style.backgroundColor = '';
+                        row.style.color = '';
+                        if (button) {
+                            button.style.backgroundColor = '';
+                        }
+                    }
+                }
+            }
+        });
+    });
+    

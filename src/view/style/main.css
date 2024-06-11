@@ -8,7 +8,7 @@
     --bg-header: #2d2f48;
     --bg-principal: #fffafa;
     --bg-footer: #323970;
-    --input-color: #8C8C8C;
+    --input-color: #8c8c8c;
     --white: #fff;
     --black: #000;
     --yellow: #d6b659;
@@ -594,12 +594,22 @@ section.inputs{
   align-self: flex-start;
 }
 
+div.container > form{
+  display: flex;
+  align-items: center;
+}
+
 div.container > form > div.input-group {
   display: flex;
   flex-direction: column;
-  align-items: flex-start; 
+  align-items: center; 
+  width: 100%;
 }
-
+div.container > form > div.input-group > label {
+ display: flex;
+ text-align: start;
+ width: 70%;
+}
 div.input-group input {
   width: 70%;
   border-radius: 15px;
@@ -699,13 +709,13 @@ justify-content: start;
 }
 
 div.form-group input, select{
-  width: 70%;
+  width: 72%;
   border-radius: 15px;
   height: 25px;
   background-color: var(--input-color);
   border: none;
   color: var(--white);
-  padding: 3px;
+  padding: 5px;
 }
 div.form-group select#categoria{
  padding: 15px;
@@ -1101,7 +1111,7 @@ section.register-Customer {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  width: 450px;
+  width: 550PX;
   margin: auto;
   margin-top: 35px;
   padding: 20px;
@@ -1113,7 +1123,7 @@ section.register-Customer {
 section.register-Customer form {
   display: flex;
   flex-direction: column;
-  width: 65%;
+  width: 85%;
   color: var(--white);
   margin: auto;
   padding: 20px;
@@ -1154,7 +1164,7 @@ div.container > form > div.input-group-customer {
   color: var(--white); 
 }
 
-div.input-group-customer input {
+div.container > form.register-customer-form > div.input-group-customer input {
   width: 100%;
   border-radius: 15px;
   height: 25px;
