@@ -184,7 +184,7 @@
                         estado: document.getElementById('estado').value,
                         pais: document.getElementById('pais').value,
                         usuario: {
-                            usuarioId: "915B6BE9-2B0E-400E-A1F6-5A912CFD26F7"
+                            usuarioId: "1"
                         }
                     };
     
@@ -230,9 +230,9 @@
     
                     const data = {
                         nome: "Nova categoria",
-                        descricao: document.getElementById('name').value,
+                        descricao: document.getElementById('nome').value,
                         usuario: {
-                            usuarioId: "915B6BE9-2B0E-400E-A1F6-5A912CFD26F7"
+                            usuarioId: "1"
                         }
                     };
     
@@ -265,24 +265,24 @@
     document.addEventListener('DOMContentLoaded', function () {
         const pathname = window.location.pathname;
         
-        if (pathname.includes('registerProducts')) {
+        if (pathname.includes('registerProducts.html')) {
             console.log('Entrou no método');
-            const forms = document.querySelectorAll('.register-category-form');
-            console.log('Formulários encontrados:', forms.length);
+            const forms = document.querySelectorAll('.register-product-form');
+            console.log('Formulários encontrados:', forms);
     
             forms.forEach(function(form) {
                 form.addEventListener('submit', function (event) {
                     event.preventDefault();
     
                     const data = {
-                        nome: document.getElementById('nome').value,
-                        preco: document.getElementById('preco').value,
-                        custo: document.getElementById('custo').value,
+                        descricao: document.getElementById('nome').value,
+                        preco: parseFloat(document.getElementById('preco').value),  
+                        custo: parseFloat(document.getElementById('custo').value),  
                         usuario: {
-                            usuarioId: "915B6BE9-2B0E-400E-A1F6-5A912CFD26F7"
+                            usuarioId: "1"
                         },
                         categoria: {
-                            categoriaId: document.getElementById('categoria').value
+                            categoriaId: 1
                         }
                     };
     
@@ -310,7 +310,7 @@
             });
         }
     });
-
+    
     //Listar Clientes
     document.addEventListener('DOMContentLoaded', function () {
         const pathname = window.location.pathname;
@@ -372,7 +372,7 @@
         }
     });
 
-        //Listar categorias
+        //Listar produtos
         document.addEventListener('DOMContentLoaded', function () {
             const pathname = window.location.pathname;
             
@@ -390,7 +390,7 @@
                         row.innerHTML = `
                         <td class="reservationCheckbox"><input type="checkbox" class="checkbox"></td>
                         <td>${produto.produtoId}</td>
-                        <td>${produto.nome}</td>
+                        <td>${produto.descricao}</td>
                         <td>${produto.custo}</td>
                         <td>${produto.preco}</td>
                         <td class="editButton"><button class="editButton"><i class="fa-solid fa-pencil"></i></button></td>

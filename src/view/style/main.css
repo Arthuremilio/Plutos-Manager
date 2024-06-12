@@ -589,7 +589,7 @@ section.inputs{
 }
 
 .container {
-  width: 300px;
+  width: 400px;
   padding: 20px;
   align-self: flex-start;
 }
@@ -597,6 +597,7 @@ section.inputs{
 div.container > form{
   display: flex;
   align-items: center;
+  width: 100%;
 }
 
 div.container > form > div.input-group {
@@ -652,17 +653,17 @@ div.cep-number > .input-number > input#numero{
   padding: 3px;
 } 
 
-button.continue {
+section.buttons > button.continue {
   width: 70%;
   padding: 10px;
   font-size: 16px;
   font-weight: bolder;
   background-color: var(--yellow);
-  color: var(--black);
   border: none;
   border-radius: 18px;
   cursor: pointer;
   margin-top: 60px;
+  color: #fff;
 }
 
 button.continue:hover,
@@ -1111,7 +1112,7 @@ section.register-Customer {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  width: 550PX;
+  width: 700px;
   margin: auto;
   margin-top: 35px;
   padding: 20px;
@@ -1150,9 +1151,10 @@ section.register-Customer form  > input {
 
 section.register-Customer form  > input::placeholder {
   color: #fff;
+  width: 600px;
 }
-.container {
-  width: 400px;
+div.container {
+  width: 600px;
   padding: 20px;
   align-self: flex-start;
 }
@@ -1162,6 +1164,7 @@ div.container > form > div.input-group-customer {
   flex-direction: column;
   align-items: flex-start;
   color: var(--white); 
+  width: 100%;
 }
 
 div.container > form.register-customer-form > div.input-group-customer input {
