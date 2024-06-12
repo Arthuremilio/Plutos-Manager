@@ -1,3 +1,57 @@
+// Método de login
+document.addEventListener('DOMContentLoaded', function() {
+    console.log('DOM completamente carregado e analisado');
+
+    const loginForm = document.getElementById('loginForm');
+    if (!loginForm) {
+        console.error('Elemento loginForm não encontrado');
+        return;
+    }
+
+    loginForm.addEventListener('submit', function(event) {
+        event.preventDefault();
+
+        const loginUsuario = document.getElementById('usuario').value;
+        const senha = document.getElementById('senha').value;
+
+        console.log('Enviando dados:', { loginUsuario, senha });
+
+        fetch('http://localhost:8080/api/usuarios/login', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                loginUsuario: loginUsuario,
+                senha: senha
+            })
+        })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Erro na resposta do servidor');
+            }
+            return response.json();
+        })
+        .then(data => {
+            console.log('Resposta recebida:', data);
+
+            if (data) {
+                localStorage.setItem('usuario', loginUsuario);
+                localStorage.setItem('senha', senha);
+                localStorage.setItem('id', data);
+                window.location.href = 'home.html';
+            } else {
+                console.error('usuário não encontrado na resposta');
+                document.getElementById('error-message').style.display = 'block';
+            }
+        })
+        .catch(error => {
+            console.error('Erro:', error);
+            document.getElementById('error-message').style.display = 'block';
+        });
+    });
+});
+    
     // Formatar a data para padrão BR
     function formatarDataParaBR(data) {
       const [ano, mes, dia] = data.split('-');
@@ -184,7 +238,7 @@
                         estado: document.getElementById('estado').value,
                         pais: document.getElementById('pais').value,
                         usuario: {
-                            usuarioId: "1"
+                            usuarioId: localStorage.getItem('id')
                         }
                     };
     
@@ -232,7 +286,7 @@
                         nome: "Nova categoria",
                         descricao: document.getElementById('nome').value,
                         usuario: {
-                            usuarioId: "1"
+                            usuarioId: localStorage.getItem('id')
                         }
                     };
     
@@ -279,10 +333,10 @@
                         preco: parseFloat(document.getElementById('preco').value),  
                         custo: parseFloat(document.getElementById('custo').value),  
                         usuario: {
-                            usuarioId: "1"
+                            usuarioId: localStorage.getItem('id')
                         },
                         categoria: {
-                            categoriaId: 1
+                            categoriaId: document.getElementById('categoria').value
                         }
                     };
     
@@ -310,7 +364,7 @@
             });
         }
     });
-    
+
     //Listar Clientes
     document.addEventListener('DOMContentLoaded', function () {
         const pathname = window.location.pathname;
