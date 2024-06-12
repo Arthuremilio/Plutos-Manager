@@ -261,6 +261,56 @@
         }
     });
 
+    // Cadastro de produto
+    document.addEventListener('DOMContentLoaded', function () {
+        const pathname = window.location.pathname;
+        
+        if (pathname.includes('registerProducts')) {
+            console.log('Entrou no método');
+            const forms = document.querySelectorAll('.register-category-form');
+            console.log('Formulários encontrados:', forms.length);
+    
+            forms.forEach(function(form) {
+                form.addEventListener('submit', function (event) {
+                    event.preventDefault();
+    
+                    const data = {
+                        nome: document.getElementById('nome').value,
+                        preco: document.getElementById('preco').value,
+                        custo: document.getElementById('custo').value,
+                        usuario: {
+                            usuarioId: "915B6BE9-2B0E-400E-A1F6-5A912CFD26F7"
+                        },
+                        categoria: {
+                            categoriaId: document.getElementById('categoria').value
+                        }
+                    };
+    
+                    console.log(JSON.stringify(data));
+    
+                    fetch('http://localhost:8080/api/produto', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify(data)
+                    })
+                    .then(response => response.json())
+                    .then(data => {
+                        console.log('Success:', data);
+                        alert('Produto cadastrado com sucesso!');
+                        forms.forEach(form => form.reset());
+                        window.location.href = 'products.html';
+                    })
+                    .catch((error) => {
+                        console.error('Error:', error);
+                        alert('Erro ao cadastrar produto.');
+                    });
+                });
+            });
+        }
+    });
+
     //Listar Clientes
     document.addEventListener('DOMContentLoaded', function () {
         const pathname = window.location.pathname;
@@ -321,6 +371,36 @@
             .catch(error => console.error('Erro ao obter categorias:', error));
         }
     });
+
+        //Listar categorias
+        document.addEventListener('DOMContentLoaded', function () {
+            const pathname = window.location.pathname;
+            
+            if (pathname.includes('products.html')) {
+                console.log('Entrou no método de produtos');
+        
+                fetch('http://localhost:8080/api/produto')
+                .then(response => response.json())
+                .then(data => {
+                    console.log('Produtos obtidos:', data);
+        
+                    const tableBody = document.querySelector('#reservationsTable tbody');
+                    data.forEach(function(produto) {
+                        const row = document.createElement('tr');
+                        row.innerHTML = `
+                        <td class="reservationCheckbox"><input type="checkbox" class="checkbox"></td>
+                        <td>${produto.produtoId}</td>
+                        <td>${produto.nome}</td>
+                        <td>${produto.custo}</td>
+                        <td>${produto.preco}</td>
+                        <td class="editButton"><button class="editButton"><i class="fa-solid fa-pencil"></i></button></td>
+                        `;
+                        tableBody.appendChild(row);
+                    });
+                })
+                .catch(error => console.error('Erro ao obter categorias:', error));
+            }
+        });
     
     
     // Exibir o usuário
