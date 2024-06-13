@@ -456,6 +456,157 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         });
     
+    //Deletar categoria
+    document.addEventListener('DOMContentLoaded', (event) => {
+        const pathname = window.location.pathname;
+            
+            if (pathname.includes('category.html')) {
+                document.getElementById('btnDelete').addEventListener('click', () => {
+                    const table = document.getElementById('reservationsTable');
+                    const rows = table.getElementsByTagName('tbody')[0].getElementsByTagName('tr');
+                    const idsToDelete = [];
+                    const promises = [];
+            
+                    for (let i = 0; i < rows.length; i++) {
+                        const checkbox = rows[i].getElementsByTagName('input')[0];
+                        if (checkbox && checkbox.checked) {
+                            const id = rows[i].getElementsByTagName('td')[1].innerText;
+                            idsToDelete.push(id);
+                        }
+                    }
+            
+                    idsToDelete.forEach(id => {
+                        const deletePromise = fetch(`http://localhost:8080/api/categoria/${id}`, {
+                            method: 'DELETE'
+                        })
+                        .then(response => {
+                            if (response.ok) {
+                                console.log(`Categoria com id ${id} deletada com sucesso.`);
+                            } else {
+                                console.error(`Falha ao deletar categoria com id: ${id}`);
+                            }
+                        })
+                        .catch(error => console.error('Erro:', error));
+            
+                        promises.push(deletePromise);
+                    });
+
+                    Promise.all(promises).then(() => {
+                        window.location.reload();
+                    });
+                });
+            };
+    });
+
+    // Deletar clientes
+    document.addEventListener('DOMContentLoaded', (event) => {
+        const pathname = window.location.pathname;
+        console.log('entrou no metodo delete');
+    
+        if (pathname.includes('customers.html')) {
+            const btnDelete = document.getElementById('btnDelete');
+            if (btnDelete) {
+                btnDelete.addEventListener('click', () => {
+                    const table = document.getElementById('reservationsTable');
+                    const rows = table.getElementsByTagName('tbody')[0].getElementsByTagName('tr');
+                    const idsToDelete = [];
+                    const promises = [];
+    
+                    console.log('fez a leitura dos elementos');
+    
+                    for (let i = 0; i < rows.length; i++) {
+                        const checkbox = rows[i].getElementsByTagName('input')[0];
+                        if (checkbox && checkbox.checked) {
+                            const id = rows[i].getElementsByTagName('td')[1].innerText.trim();
+                            idsToDelete.push(id);
+                        }
+                    }
+    
+                    console.log('elementos selecionados:', idsToDelete);
+    
+                    idsToDelete.forEach(id => {
+                        const deletePromise = fetch(`http://localhost:8080/api/pessoas/${id}`, {
+                            method: 'DELETE'
+                        })
+                        .then(response => {
+                            if (response.status = 204) {
+                                console.log(`Pessoa com id ${id} deletada com sucesso.`);
+                            } else {
+                                console.error(`Falha ao deletar pessoa com id: ${id}`, response.status);
+                            }
+                        })
+                        .catch(error => console.error('Erro:', error));
+    
+                        promises.push(deletePromise);
+                    });
+    
+                    Promise.all(promises).then(() => {
+                        console.log('Todos os itens foram deletados, recarregando a página.');
+                        window.location.reload();
+                    });
+                });
+            } else {
+                console.error('Botão de deletar não encontrado');
+            }
+        } else {
+            console.log('URL não corresponde a customers.html');
+        }
+    });
+    //Deletar produtos
+    document.addEventListener('DOMContentLoaded', (event) => {
+        const pathname = window.location.pathname;
+        console.log('entrou no metodo delete');
+    
+        if (pathname.includes('products.html')) {
+            const btnDelete = document.getElementById('btnDelete');
+            if (btnDelete) {
+                btnDelete.addEventListener('click', () => {
+                    const table = document.getElementById('reservationsTable');
+                    const rows = table.getElementsByTagName('tbody')[0].getElementsByTagName('tr');
+                    const idsToDelete = [];
+                    const promises = [];
+    
+                    console.log('fez a leitura dos elementos');
+    
+                    for (let i = 0; i < rows.length; i++) {
+                        const checkbox = rows[i].getElementsByTagName('input')[0];
+                        if (checkbox && checkbox.checked) {
+                            const id = rows[i].getElementsByTagName('td')[1].innerText.trim();
+                            idsToDelete.push(id);
+                        }
+                    }
+    
+                    console.log('elementos selecionados:', idsToDelete);
+    
+                    idsToDelete.forEach(id => {
+                        const deletePromise = fetch(`http://localhost:8080/api/produto/${id}`, {
+                            method: 'DELETE'
+                        })
+                        .then(response => {
+                            if (response.status = 204) {
+                                console.log(`Produto com id ${id} deletada com sucesso.`);
+                            } else {
+                                console.error(`Falha ao deletar o produto com id: ${id}`, response.status);
+                            }
+                        })
+                        .catch(error => console.error('Erro:', error));
+    
+                        promises.push(deletePromise);
+                    });
+    
+                    Promise.all(promises).then(() => {
+                        console.log('Todos os itens foram deletados, recarregando a página.');
+                        window.location.reload();
+                    });
+                });
+            } else {
+                console.error('Botão de deletar não encontrado');
+            }
+        } else {
+            console.log('URL não corresponde a customers.html');
+        }
+    });
+       
     
     // Exibir o usuário
     window.onload = function() {
