@@ -962,27 +962,31 @@ document.addEventListener('DOMContentLoaded', () => {
     
     // mudar a cor na grid para linhas selecionadas 
     document.addEventListener('DOMContentLoaded', function() {
-        const reservationsTable = document.getElementById('reservationsTable');
-        reservationsTable.addEventListener('change', function(event) {
-            if (event.target.matches('.checkbox')) {
-                var row = event.target.closest('tr');
-                if (row) {
-                    var button = row.querySelector('button.editButton')
-                    if (event.target.checked) {
-                        row.style.backgroundColor = 'darkred';
-                        row.style.color = 'white';
-                        if (button) {
-                            button.style.backgroundColor = 'darkred';
-                        }
-                    } else {
-                        row.style.backgroundColor = '';
-                        row.style.color = '';
-                        if (button) {
-                            button.style.backgroundColor = '';
+        const pathname = window.location.pathname;
+        
+        if (pathname.includes('registerProducts.html') || pathname.includes('registerCustomer.html') || pathname.includes('category.html')) {
+            const reservationsTable = document.getElementById('reservationsTable');
+            reservationsTable.addEventListener('change', function(event) {
+                if (event.target.matches('.checkbox')) {
+                    var row = event.target.closest('tr');
+                    if (row) {
+                        var button = row.querySelector('button.editButton')
+                        if (event.target.checked) {
+                            row.style.backgroundColor = 'darkred';
+                            row.style.color = 'white';
+                            if (button) {
+                                button.style.backgroundColor = 'darkred';
+                            }
+                        } else {
+                            row.style.backgroundColor = '';
+                            row.style.color = '';
+                            if (button) {
+                                button.style.backgroundColor = '';
+                            }
                         }
                     }
                 }
-            }
-        });
+            });
+        }
     });
     
