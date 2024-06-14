@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Plutos Manager</title>
+        <link rel="stylesheet" type="text/css" href="../style/main.css">
+        <link rel="stylesheet" type="text/css" href="../style/responsive.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
+    </head>
+    <body>
+        <header>
+            <img src="../img/Logo-header.png" alt="Logo Plutos Manager">
+            <p id="usuarioLogado"></p>
+            <nav class="menu-standard">
+            <ul>
+                <li><a href="customer-index.html">Clientes</a></li>
+                <li><a href="products-index.html">Produtos</a></li>                
+                <li><a href="category-index.html">Categorias</a></li>
+                <li><a href="order-index" class="border-right" >Vendas</a></li>
+                <li><button class="exit"><a href="index.html">Sair <i class="fas fa-sign-out-alt"></i></a></button></li>
+            </ul>
+            </nav>
+            <button class="hamburger-menu" aria-label="Abrir menu"><span class="icon-menu"></span></button>
+        </header>
+        <main>
+            <div class="menu">
+                <ul>
+                    <li><a href="customer-index.html">Clientes</a></li>
+                    <li><a href="products-index.html">Produtos</a></li>                    
+                    <li><a href="category-index.html">Categorias</a></li>
+                    <li><a href="#">Vendas</a></li>
+                    <li><button class="exit"><a href="index.html">Sair <i class="fas fa-sign-out-alt"></i></a></button></li>
+                </ul>
+            </div>
+            <section class="register-Customer">
+                <h3>Alterar cliente</h3>
+                <h5 id="idItem">ID: {id}</h5>
+                <section class="inputs">
+                    <div class="container">
+                        <form action="#" class="register-customer-form">
+                            <div class="input-group-customer">
+                                <label for="nome">Nome</label>
+                                <input type="text" id="nome" name="nome" required>
+                            </div>
+                            <div class="input-group-customer">
+                                <label for="documento">Documento <span id="cpf-hint" class="hint"></span></label>
+                                <input type="text" id="documento" name="documento" required>                                
+                            </div>                                                        
+                            <div class="input-group-customer">
+                                <label for="email">Email</label>
+                                <input type="email" id="email" name="email" required>
+                            </div>
+                            <div class="input-group-customer">
+                                <label for="telefone">Telefone</label>
+                                <input type="text" id="telefone" name="telefone" required>
+                            </div>
+                            <div class="input-group-customer">
+                                <label for="saldo">Saldo disponível</label>
+                                <input type="number" id="saldo" name="saldo" required>
+                            </div>
+                            <div class="input-group-customer">
+                                <label for="cep">CEP*</label>
+                                <input type="text" id="cep" name="cep" required>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="container">
+                        <form action="#" class="register-customer-form">                            
+                            <div class="input-group-customer">
+                                <label for="cidade">Cidade</label>
+                                <input type="text" id="cidade" name="cidade" required>
+                            </div>
+                            <div class="input-group-customer">
+                                <label for="estado">Estado</label>
+                                <input type="text" id="estado" name="estado" required>
+                            </div>
+                            <div class="input-group-customer">
+                                <label for="pais">País</label>
+                                <input type="text" id="pais" name="pais" required>
+                            </div>
+                            <div class="input-group-customer">
+                                <label for="rua">Rua</label>
+                                <input type="text" id="rua" name="rua" required>
+                            </div>
+                            <div class="input-group-customer">
+                                <label for="bairro">Bairro</label>
+                                <input type="text" id="bairro" name="bairro" required>
+                            </div>
+                            <div class="input-group-customer">
+                                <label for="numero">Número</label>
+                                <input type="text" id="numero" name="numero" required>
+                            </div>
+                    </div>
+                </section>
+                <section class="Buttons">
+                    <button type="submit" class="continue">CADASTRAR</button>
+                    <button type="reset"><a href="customer-index.html">CANCELAR</a></button>
+                </section>
+            </form>
+            </section>
+        </main>
+        <footer>
+            <div class="icon-footer">
+                <img src="../img/Logo-header.png" alt="Icone do rodapé">
+            </div>
+            <div class="menu-footer">
+                <ul>
+                    <li><a href="customer-index.html">Clientes</a></li>
+                    <li><a href="products-index.html">Produtos</a></li>                    
+                    <li><a href="category-index.html">Categorias</a></li>
+                    <li><a href="#">Vendas</a></li>
+                </ul>    
+            </div>
+            <div class="contact">
+                <h3>Contatos</h3>
+                <h5>(17)99178-0150</h4>
+                <h5>(17)99178-0150</h4>
+                <h5>contato@plutosmanager.com</h4>
+            </div>
+        </footer>
+        <script src="../script/script.js"></script>
+    </body>
+</html>

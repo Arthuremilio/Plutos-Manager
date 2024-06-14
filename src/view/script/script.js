@@ -1,55 +1,53 @@
 // Método de login
 document.addEventListener('DOMContentLoaded', function() {
-    console.log('DOM completamente carregado e analisado');
+    const pathname = window.location.pathname;
+            
+    if (pathname.includes('acess.html')) {
+        const loginForm = document.getElementById('loginForm');
 
-    const loginForm = document.getElementById('loginForm');
-    if (!loginForm) {
-        console.error('Elemento loginForm não encontrado');
-        return;
-    }
+        loginForm.addEventListener('submit', function(event) {
+            event.preventDefault();
 
-    loginForm.addEventListener('submit', function(event) {
-        event.preventDefault();
+            const loginUsuario = document.getElementById('usuario').value;
+            const senha = document.getElementById('senha').value;
 
-        const loginUsuario = document.getElementById('usuario').value;
-        const senha = document.getElementById('senha').value;
+            console.log('Enviando dados:', { loginUsuario, senha });
 
-        console.log('Enviando dados:', { loginUsuario, senha });
-
-        fetch('http://localhost:8080/api/usuarios/login', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({
-                loginUsuario: loginUsuario,
-                senha: senha
+            fetch('http://localhost:8080/api/usuarios/login', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    loginUsuario: loginUsuario,
+                    senha: senha
+                })
             })
-        })
-        .then(response => {
-            if (!response.ok) {
-                throw new Error('Erro na resposta do servidor');
-            }
-            return response.json();
-        })
-        .then(data => {
-            console.log('Resposta recebida:', data);
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Erro na resposta do servidor');
+                }
+                return response.json();
+            })
+            .then(data => {
+                console.log('Resposta recebida:', data);
 
-            if (data) {
-                localStorage.setItem('usuario', loginUsuario);
-                localStorage.setItem('senha', senha);
-                localStorage.setItem('id', data);
-                window.location.href = 'home.html';
-            } else {
-                console.error('usuário não encontrado na resposta');
+                if (data) {
+                    localStorage.setItem('usuario', loginUsuario);
+                    localStorage.setItem('senha', senha);
+                    localStorage.setItem('id', data);
+                    window.location.href = 'home.html';
+                } else {
+                    console.error('usuário não encontrado na resposta');
+                    document.getElementById('error-message').style.display = 'block';
+                }
+            })
+            .catch(error => {
+                console.error('Erro:', error);
                 document.getElementById('error-message').style.display = 'block';
-            }
-        })
-        .catch(error => {
-            console.error('Erro:', error);
-            document.getElementById('error-message').style.display = 'block';
+            });
         });
-    });
+    };
 });
     
     // Formatar a data para padrão BR
@@ -114,7 +112,6 @@ document.addEventListener('DOMContentLoaded', function() {
         
                 campoCPF.addEventListener("change", function() {
                     let cpf = campoCPF.value;
-                    console.log("Validando CPF:", cpf);
         
                     if (validarCPF(cpf)) {
                         campoCPF.setCustomValidity('CPF válido');
@@ -140,7 +137,6 @@ document.addEventListener('DOMContentLoaded', function() {
     function salvarUsuarioSenhaNoLocalStorage(usuario, senha) {
         localStorage.setItem('usuario', usuario);
         localStorage.setItem('senha', senha);
-        console.log("Usuário e senha armazenados em localStorage");
     }
 
 // CONSUMINDO AS APIS DO BACKEND
@@ -197,7 +193,6 @@ document.addEventListener('DOMContentLoaded', function() {
                     })
                     .then(response => response.json())
                     .then(data => {
-                        console.log('Success:', data.loginUsuario);
                         alert('Usuário criado com sucesso!');
                         form.reset();
 
@@ -216,7 +211,7 @@ document.addEventListener('DOMContentLoaded', function() {
     document.addEventListener('DOMContentLoaded', function () {
         const pathname = window.location.pathname;
     
-        if (pathname.includes('registerCustomer')) {
+        if (pathname.includes('registerCustomer.html')) {
     
             const forms = document.querySelectorAll('.register-customer-form');
     
@@ -241,8 +236,6 @@ document.addEventListener('DOMContentLoaded', function() {
                             usuarioId: localStorage.getItem('id')
                         }
                     };
-    
-                    console.log(JSON.stringify(data));
     
                     fetch('http://localhost:8080/api/pessoas', {
                         method: 'POST',
@@ -274,9 +267,7 @@ document.addEventListener('DOMContentLoaded', function() {
         const pathname = window.location.pathname;
         
         if (pathname.includes('registerCategory')) {
-            console.log('Entrou no método');
             const forms = document.querySelectorAll('.register-category-form');
-            console.log('Formulários encontrados:', forms.length);
     
             forms.forEach(function(form) {
                 form.addEventListener('submit', function (event) {
@@ -290,8 +281,6 @@ document.addEventListener('DOMContentLoaded', function() {
                         }
                     };
     
-                    console.log(JSON.stringify(data));
-    
                     fetch('http://localhost:8080/api/categoria', {
                         method: 'POST',
                         headers: {
@@ -302,7 +291,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     .then(response => response.json())
                     .then(data => {
                         console.log('Success:', data);
-                        alert('Categoria cadastrada com sucesso!');
+                        alert('Categoria alterada com sucesso!');
                         forms.forEach(form => form.reset());
                         window.location.href = 'category.html';
                     })
@@ -320,9 +309,7 @@ document.addEventListener('DOMContentLoaded', function() {
         const pathname = window.location.pathname;
         
         if (pathname.includes('registerProducts.html')) {
-            console.log('Entrou no método');
             const forms = document.querySelectorAll('.register-product-form');
-            console.log('Formulários encontrados:', forms);
     
             forms.forEach(function(form) {
                 form.addEventListener('submit', function (event) {
@@ -339,8 +326,6 @@ document.addEventListener('DOMContentLoaded', function() {
                             categoriaId: document.getElementById('categoria').value
                         }
                     };
-    
-                    console.log(JSON.stringify(data));
     
                     fetch('http://localhost:8080/api/produto', {
                         method: 'POST',
@@ -370,25 +355,23 @@ document.addEventListener('DOMContentLoaded', function() {
         const pathname = window.location.pathname;
         
         if (pathname.includes('customers.html')) {
-            console.log('Entrou no método de categorias');
-    
+            console.log('Entrou no método')
             fetch('http://localhost:8080/api/pessoas')
             .then(response => response.json())
             .then(data => {
-                console.log('Clientes obtidos:', data);
     
                 const tableBody = document.querySelector('#reservationsTable tbody');
-                tableBody.innerHTML = '';  // Limpa o conteúdo existente da tabela
+                tableBody.innerHTML = '';  
                 data.forEach(function(pessoa) {
                     const row = document.createElement('tr');
                     row.innerHTML = `
                         <td class="reservationCheckbox"><input type="checkbox" class="checkbox"></td>
-                        <td>${pessoa.pessoaId}</td>
+                        <td class="customer-id">${pessoa.pessoaId}</td>
                         <td>${pessoa.nome}</td>
                         <td>${pessoa.email}</td>
                         <td>${pessoa.telefone}</td>
                         <td>${pessoa.saldoDisponivel.toFixed(2)}</td>
-                        <td class="editButton"><button class="editButton"><i class="fa-solid fa-pencil"></i></button></td>
+                        <td class="editButton"><button id="editButton"><i class="fa-solid fa-pencil"></i></button></td>
                     `;
                     tableBody.appendChild(row);
                 });
@@ -403,21 +386,18 @@ document.addEventListener('DOMContentLoaded', function() {
         const pathname = window.location.pathname;
         
         if (pathname.includes('category.html')) {
-            console.log('Entrou no método de categorias');
-    
             fetch('http://localhost:8080/api/categoria')
             .then(response => response.json())
             .then(data => {
-                console.log('Categorias obtidas:', data);
     
                 const tableBody = document.querySelector('#reservationsTable tbody');
                 data.forEach(function(categoria) {
                     const row = document.createElement('tr');
                     row.innerHTML = `
-                        <td class="reservationCheckbox"><input type="checkbox" class="checkbox"></td>
-                        <td>${categoria.categoriaId}</td>
-                        <td>${categoria.descricao}</td>
-                        <td class="editButton"><button class="editButton"><i class="fa-solid fa-pencil"></i></button></td>
+                            <td class="reservationCheckbox"><input type="checkbox" class="checkbox"></td>
+                            <td class="categoria-id">${categoria.categoriaId}</td>
+                            <td class="categoria-descricao">${categoria.descricao}</td>
+                            <td class="editButton"><button id="editButton"><i class="fa-solid fa-pencil"></i></button></td>
                     `;
                     tableBody.appendChild(row);
                 });
@@ -431,23 +411,21 @@ document.addEventListener('DOMContentLoaded', function() {
             const pathname = window.location.pathname;
             
             if (pathname.includes('products.html')) {
-                console.log('Entrou no método de produtos');
         
                 fetch('http://localhost:8080/api/produto')
                 .then(response => response.json())
                 .then(data => {
-                    console.log('Produtos obtidos:', data);
         
                     const tableBody = document.querySelector('#reservationsTable tbody');
                     data.forEach(function(produto) {
                         const row = document.createElement('tr');
                         row.innerHTML = `
                         <td class="reservationCheckbox"><input type="checkbox" class="checkbox"></td>
-                        <td>${produto.produtoId}</td>
+                        <td class="produto-id">${produto.produtoId}</td>
                         <td>${produto.descricao}</td>
                         <td>${produto.custo}</td>
                         <td>${produto.preco}</td>
-                        <td class="editButton"><button class="editButton"><i class="fa-solid fa-pencil"></i></button></td>
+                        <td class="editButton"><button id="editButton"><i class="fa-solid fa-pencil"></i></button></td>
                         `;
                         tableBody.appendChild(row);
                     });
@@ -501,7 +479,6 @@ document.addEventListener('DOMContentLoaded', function() {
     // Deletar clientes
     document.addEventListener('DOMContentLoaded', (event) => {
         const pathname = window.location.pathname;
-        console.log('entrou no metodo delete');
     
         if (pathname.includes('customers.html')) {
             const btnDelete = document.getElementById('btnDelete');
@@ -512,8 +489,6 @@ document.addEventListener('DOMContentLoaded', function() {
                     const idsToDelete = [];
                     const promises = [];
     
-                    console.log('fez a leitura dos elementos');
-    
                     for (let i = 0; i < rows.length; i++) {
                         const checkbox = rows[i].getElementsByTagName('input')[0];
                         if (checkbox && checkbox.checked) {
@@ -521,8 +496,6 @@ document.addEventListener('DOMContentLoaded', function() {
                             idsToDelete.push(id);
                         }
                     }
-    
-                    console.log('elementos selecionados:', idsToDelete);
     
                     idsToDelete.forEach(id => {
                         const deletePromise = fetch(`http://localhost:8080/api/pessoas/${id}`, {
@@ -545,70 +518,405 @@ document.addEventListener('DOMContentLoaded', function() {
                         window.location.reload();
                     });
                 });
-            } else {
-                console.error('Botão de deletar não encontrado');
-            }
-        } else {
-            console.log('URL não corresponde a customers.html');
-        }
+            };
+        };
     });
+
     //Deletar produtos
     document.addEventListener('DOMContentLoaded', (event) => {
         const pathname = window.location.pathname;
-        console.log('entrou no metodo delete');
     
         if (pathname.includes('products.html')) {
             const btnDelete = document.getElementById('btnDelete');
-            if (btnDelete) {
-                btnDelete.addEventListener('click', () => {
-                    const table = document.getElementById('reservationsTable');
-                    const rows = table.getElementsByTagName('tbody')[0].getElementsByTagName('tr');
-                    const idsToDelete = [];
-                    const promises = [];
-    
-                    console.log('fez a leitura dos elementos');
-    
-                    for (let i = 0; i < rows.length; i++) {
-                        const checkbox = rows[i].getElementsByTagName('input')[0];
-                        if (checkbox && checkbox.checked) {
-                            const id = rows[i].getElementsByTagName('td')[1].innerText.trim();
-                            idsToDelete.push(id);
-                        }
+
+            btnDelete.addEventListener('click', () => {
+                const table = document.getElementById('reservationsTable');
+                const rows = table.getElementsByTagName('tbody')[0].getElementsByTagName('tr');
+                const idsToDelete = [];
+                const promises = [];
+
+                for (let i = 0; i < rows.length; i++) {
+                    const checkbox = rows[i].getElementsByTagName('input')[0];
+                    if (checkbox && checkbox.checked) {
+                        const id = rows[i].getElementsByTagName('td')[1].innerText.trim();
+                        idsToDelete.push(id);
                     }
-    
-                    console.log('elementos selecionados:', idsToDelete);
-    
-                    idsToDelete.forEach(id => {
-                        const deletePromise = fetch(`http://localhost:8080/api/produto/${id}`, {
-                            method: 'DELETE'
-                        })
-                        .then(response => {
-                            if (response.status = 204) {
-                                console.log(`Produto com id ${id} deletada com sucesso.`);
-                            } else {
-                                console.error(`Falha ao deletar o produto com id: ${id}`, response.status);
-                            }
-                        })
-                        .catch(error => console.error('Erro:', error));
-    
-                        promises.push(deletePromise);
+                }
+
+                console.log('elementos selecionados:', idsToDelete);
+
+                idsToDelete.forEach(id => {
+                    const deletePromise = fetch(`http://localhost:8080/api/produto/${id}`, {
+                        method: 'DELETE'
+                    })
+                    .then(response => {
+                        if (response.status = 204) {
+                            console.log(`Produto com id ${id} deletada com sucesso.`);
+                        } else {
+                            console.error(`Falha ao deletar o produto com id: ${id}`, response.status);
+                        }
+                    })
+                    .catch(error => console.error('Erro:', error));
+
+                    promises.push(deletePromise);
+                });
+
+                Promise.all(promises).then(() => {
+                    console.log('Todos os itens foram deletados, recarregando a página.');
+                    window.location.reload();
+                });
+            });
+        };
+    });
+
+// Preencher e alterar categoria   
+document.addEventListener('DOMContentLoaded', () => {
+    const pathname = window.location.pathname;
+
+    if (pathname.includes('category.html')) {
+        const table = document.getElementById('reservationsTable');
+
+        table.addEventListener('click', (event) => {
+            if (event.target.closest('#editButton')) {
+                console.log('Acionou o evento click');
+                const row = event.target.closest('tr');
+                const categoryId = row.querySelector('.categoria-id').textContent.trim();
+                console.log(row)
+                // Fazer a requisição GET para obter os dados da categoria
+                fetch(`http://localhost:8080/api/categoria/${categoryId}`)
+                   .then(response => {
+                        if (!response.ok) {
+                            throw new Error('Erro ao buscar dados da categoria.');
+                        }
+                        return response.json();
+                    })
+                   .then(data => {
+                        // Armazenar os dados da categoria no localStorage
+                        localStorage.setItem('idCategoria', data.categoriaId);
+                        localStorage.setItem('descricaoCategoria', data.descricao);
+
+                        // Redirecionar para a página de edição
+                        window.location.href = 'category-alter.html';
+                    })
+                   .catch(error => {
+                        console.error('Erro ao buscar dados da categoria:', error);
+                        alert('Erro ao buscar dados da categoria. Verifique o console para mais detalhes.');
                     });
+            }
+        });
+    }
+
+    if (pathname.includes('category-alter.html')) {
+        const idCategoria = localStorage.getItem('idCategoria');
+        const descricaoCategoria = localStorage.getItem('descricaoCategoria');
+
+        if (idCategoria && descricaoCategoria) {
+            document.getElementById('idItem').textContent = `ID: ${idCategoria}`;
+            document.getElementById('nome').value = descricaoCategoria;
+
+        } 
+        const forms = document.querySelectorAll('.register-category-form');
     
-                    Promise.all(promises).then(() => {
-                        console.log('Todos os itens foram deletados, recarregando a página.');
-                        window.location.reload();
+            forms.forEach(function(form) {
+                form.addEventListener('submit', function (event) {
+                    event.preventDefault();
+    
+                    const data = {
+                        categoriaId: idCategoria,    
+                        nome: "Nova categoria",
+                        descricao: document.getElementById('nome').value,
+                        usuario: {
+                            usuarioId: localStorage.getItem('id')
+                        }
+                    };
+    
+                    fetch(`http://localhost:8080/api/categoria/${idCategoria}`, {
+                        method: 'PUT',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify(data)
+                    })
+                    .then(response => response.json())
+                    .then(data => {
+                        console.log('Success:', data);
+                        alert('Categoria alterada com sucesso!');
+                        forms.forEach(form => form.reset());
+                        localStorage.removeItem('idCategoria');
+                        localStorage.removeItem('descricaoCategoria');
+                        window.location.href = 'category.html';
+                    })
+                    .catch((error) => {
+                        console.error('Error:', error);
+                        alert('Erro ao cadastrar categoria.');
                     });
                 });
-            } else {
-                console.error('Botão de deletar não encontrado');
+            });
+    }
+});
+
+// Preencher e alterar pessoa   
+document.addEventListener('DOMContentLoaded', () => {
+    const pathname = window.location.pathname;
+
+    if (pathname.includes('customers.html')) {
+        const table = document.getElementById('reservationsTable');
+
+        table.addEventListener('click', (event) => {
+            if (event.target.closest('#editButton')) {
+                console.log('Acionou o evento click');
+                const row = event.target.closest('tr');
+                const pessoaId = row.querySelector('.customer-id').textContent.trim();
+                console.log(row)
+                // Fazer a requisição GET para obter os dados da pessoa
+                fetch(`http://localhost:8080/api/pessoas/${pessoaId}`)
+                   .then(response => {
+                        if (!response.ok) {
+                            throw new Error('Erro ao buscar dados da pessoa.');
+                        }
+                        return response.json();
+                    })
+                   .then(data => {
+                        localStorage.setItem('pessoaId', data.pessoaId);
+                        localStorage.setItem('nome', data.nome);
+                        localStorage.setItem('cpf', data.cpf);
+                        localStorage.setItem('email', data.email);
+                        localStorage.setItem('telefone', data.telefone);
+                        localStorage.setItem('saldoDisponivel', data.saldoDisponivel);
+                        localStorage.setItem('cep', data.cep);
+                        localStorage.setItem('rua', data.rua);
+                        localStorage.setItem('bairro', data.bairro);
+                        localStorage.setItem('numeroResidencia', data.numeroResidencia);
+                        localStorage.setItem('cidade', data.cidade);
+                        localStorage.setItem('estado', data.estado);
+                        localStorage.setItem('pais', data.pais);
+
+                        // Redirecionar para a página de edição
+                        window.location.href = 'customer-alter.html';
+                    })
+                   .catch(error => {
+                        console.error('Erro ao buscar dados da categoria:', error);
+                        alert('Erro ao buscar dados da categoria. Verifique o console para mais detalhes.');
+                    });
             }
-        } else {
-            console.log('URL não corresponde a customers.html');
-        }
-    });
-       
+        });
+    }
+
+    if (pathname.includes('customer-alter.html')) {
+        const pessoaId = localStorage.getItem('pessoaId');
+        const nome = localStorage.getItem('nome');
+        const cpf = localStorage.getItem('cpf');
+        const email = localStorage.getItem('email');
+        const telefone = localStorage.getItem('telefone');
+        const saldoDisponivel = localStorage.getItem('saldoDisponivel');
+        const cep = localStorage.getItem('cep');
+        const rua = localStorage.getItem('rua');
+        const bairro = localStorage.getItem('bairro');
+        const numeroResidencia = localStorage.getItem('numeroResidencia');
+        const cidade = localStorage.getItem('cidade');
+        const estado = localStorage.getItem('estado');
+        const pais = localStorage.getItem('pais');
+
+        if (pessoaId && pais) {
+            document.getElementById('idItem').textContent = `ID: ${pessoaId}`;
+            document.getElementById('nome').value = nome;
+            document.getElementById('documento').value = cpf;
+            document.getElementById('email').value = email;
+            document.getElementById('telefone').value = telefone;
+            document.getElementById('saldo').value = saldoDisponivel;
+            document.getElementById('cep').value = cep;
+            document.getElementById('rua').value = rua;
+            document.getElementById('bairro').value = bairro;
+            document.getElementById('numero').value = numeroResidencia;
+            document.getElementById('cidade').value = cidade;
+            document.getElementById('estado').value = estado;
+            document.getElementById('pais').value = pais;
+        } 
+        const forms = document.querySelectorAll('.register-customer-form');
     
-    // Exibir o usuário
+        forms.forEach(function(form) {
+            form.addEventListener('submit', function (event) {
+                event.preventDefault();
+
+                const data = {
+                    pessoaId: pessoaId,
+                    nome: document.getElementById('nome').value,
+                    cpf: document.getElementById('documento').value,
+                    email: document.getElementById('email').value,
+                    telefone: document.getElementById('telefone').value,
+                    saldoDisponivel: parseFloat(document.getElementById('saldo').value),
+                    cep: document.getElementById('cep').value,
+                    rua: document.getElementById('rua').value,
+                    bairro: document.getElementById('bairro').value,
+                    numeroResidencia: document.getElementById('numero').value,
+                    cidade: document.getElementById('cidade').value,
+                    estado: document.getElementById('estado').value,
+                    pais: document.getElementById('pais').value,
+                    usuario: {
+                        usuarioId: localStorage.getItem('id')
+                    }
+                };
+
+                fetch(`http://localhost:8080/api/pessoas/${pessoaId}`, {
+                    method: 'PUT',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(data)
+                })
+                .then(response => response.json())
+                .then(data => {
+                    console.log('Success:', data);
+                    alert('Cliente cadastrado com sucesso!');
+                    localStorage.removeItem('pessoaId');
+                    localStorage.removeItem('nome');
+                    localStorage.removeItem('cpf');
+                    localStorage.removeItem('email');
+                    localStorage.removeItem('telefone');
+                    localStorage.removeItem('saldoDisponivel');
+                    localStorage.removeItem('cep');
+                    localStorage.removeItem('rua');
+                    localStorage.removeItem('bairro');
+                    localStorage.removeItem('numeroResidencia');
+                    localStorage.removeItem('cidade');
+                    localStorage.removeItem('estado');
+                    localStorage.removeItem('pais');
+                    forms.forEach(form => form.reset());
+
+                    salvarUsuarioSenhaNoLocalStorage('usuario', 'senha');
+                    window.location.href = 'customers.html';
+                })
+                .catch((error) => {
+                    console.error('Error:', error);
+                    alert('Erro ao cadastrar cliente.');
+                });
+            });
+        });
+    }
+});
+
+// Preencher e alterar produtos   
+document.addEventListener('DOMContentLoaded', () => {
+    const pathname = window.location.pathname;
+
+    if (pathname.includes('products.html')) {
+        const table = document.getElementById('reservationsTable');
+
+        table.addEventListener('click', (event) => {
+            if (event.target.closest('#editButton')) {
+                console.log('Acionou o evento click');
+                const row = event.target.closest('tr');
+                const produtoId = row.querySelector('.produto-id').textContent.trim();
+                console.log(row);
+                // Fazer a requisição GET para obter os dados do produto
+                fetch(`http://localhost:8080/api/produto/${produtoId}`)
+                   .then(response => {
+                        if (!response.ok) {
+                            throw new Error('Erro ao buscar dados do produto.');
+                        }
+                        return response.json();
+                    })
+                   .then(data => {
+                        localStorage.setItem('produtoId', data.produtoId);
+                        localStorage.setItem('descricao', data.descricao);
+                        localStorage.setItem('custo', data.custo);
+                        localStorage.setItem('preco', data.preco);
+                        localStorage.setItem('categoriaId', data.categoria.categoriaId);
+
+                        // Redirecionar para a página de edição
+                        window.location.href = 'product-alter.html';
+                    })
+                   .catch(error => {
+                        console.error('Erro ao buscar dados do produto:', error);
+                        alert('Erro ao buscar dados do produto. Verifique o console para mais detalhes.');
+                    });
+            }
+        });
+    }
+
+    if (pathname.includes('product-alter.html')) {
+        const produtoId = localStorage.getItem('produtoId');
+        const descricao = localStorage.getItem('descricao');
+        const custo = localStorage.getItem('custo');
+        const preco = localStorage.getItem('preco');
+        const categoriaId = localStorage.getItem('categoriaId')
+        const selectCategoria = document.getElementById('categoria');
+            
+        fetch('http://localhost:8080/api/categoria')
+        .then(response => response.json())
+        .then(data => {
+            data.forEach(function(categoria) {
+                const option = document.createElement('option');
+                option.value = categoria.categoriaId;
+                option.textContent = categoria.descricao;
+                selectCategoria.appendChild(option);
+                selectCategoria.value = categoriaId;
+            });
+        });
+
+        if (produtoId && descricao) {
+            document.getElementById('idItem').textContent = `ID: ${produtoId}`;
+            document.getElementById('nome').value = descricao;
+            document.getElementById('custo').value = custo;
+            document.getElementById('preco').value = preco;
+            
+        } 
+        const form = document.querySelector('.register-product-form');
+        
+        form.addEventListener('submit', function (event) {
+            event.preventDefault();
+
+            const produtoId = localStorage.getItem('produtoId');
+            const data = {
+                produtoId: produtoId,
+                descricao: document.getElementById('nome').value,
+                preco: parseFloat(document.getElementById('preco').value),  
+                custo: parseFloat(document.getElementById('custo').value),  
+                usuario: {
+                    usuarioId: localStorage.getItem('id')
+                },
+                categoria: {
+                    categoriaId: document.getElementById('categoria').value
+                }
+            };
+
+            fetch(`http://localhost:8080/api/produto/${produtoId}`, {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(data)
+            })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Erro ao atualizar produto.');
+                }
+                return response.json();
+            })
+            .then(data => {
+                console.log('Success:', data);
+                alert('Produto atualizado com sucesso!');
+                localStorage.removeItem('produtoId');
+                localStorage.removeItem('descricao');
+                localStorage.removeItem('custo');
+                localStorage.removeItem('preco');
+                localStorage.removeItem('categoriaId');
+                form.reset();
+                window.location.href = 'products.html';
+
+            })
+            .catch((error) => {
+                console.error('Error:', error);
+                alert('Erro ao atualizar produto.');
+            });
+        });
+    }
+});
+
+
+
+
+// Exibir o usuário
     window.onload = function() {
         const usuarioLogado = document.getElementById('usuarioLogado');
         const pathname = window.location.pathname;
@@ -633,19 +941,23 @@ document.addEventListener('DOMContentLoaded', function() {
     };
     // listar categorias no cadastro de produtos
     document.addEventListener('DOMContentLoaded', function() {
-        const selectCategoria = document.getElementById('categoria');
-    
-        fetch('http://localhost:8080/api/categoria')
-        .then(response => response.json())
-        .then(data => {
-            data.forEach(function(categoria) {
-                const option = document.createElement('option');
-                option.value = categoria.categoriaId;
-                option.textContent = categoria.descricao;
-                selectCategoria.appendChild(option);
-            });
-        })
-        .catch(error => console.error('Erro ao obter categorias:', error));
+        const pathname = window.location.pathname;
+        
+        if (pathname.includes('registerProducts.html')) {
+            const selectCategoria = document.getElementById('categoria');
+        
+            fetch('http://localhost:8080/api/categoria')
+            .then(response => response.json())
+            .then(data => {
+                data.forEach(function(categoria) {
+                    const option = document.createElement('option');
+                    option.value = categoria.categoriaId;
+                    option.textContent = categoria.descricao;
+                    selectCategoria.appendChild(option);
+                });
+            })
+            .catch(error => console.error('Erro ao obter categorias:', error));
+        };
     });
     
     // mudar a cor na grid para linhas selecionadas 
